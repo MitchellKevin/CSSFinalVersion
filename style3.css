@@ -1,0 +1,975 @@
+/* ============================================================
+   RESET / BASE
+   ============================================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background: #222;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+/* Hide all radio & checkbox inputs */
+input[type="radio"],
+input[type="checkbox"] {
+  display: none;
+}
+
+/* ============================================================
+   TITLE ANIMATION  (.text > .cube > .face)
+   ============================================================ */
+
+a > img:hover{
+    width: 10em;
+    height: 10em;
+    animation: easterEgg 1s infinite;
+    border-radius: 50%;
+}
+
+@keyframes easterEgg{
+    0%{
+        rotate: 0deg;
+        border-radius: 5%;
+
+    }
+    100%{
+        rotate: 360deg;
+        border-radius: 50%;
+
+    }
+}
+
+.text {
+  display: flex;
+  gap: 30px;
+  position: absolute;
+  top: 4%;
+  left: 2%;
+  z-index: -1;
+  font-size: 15em;
+  width: 100vw;
+  text-align: center;
+
+  .cube {
+    position: relative;
+    width: 15px;
+    height: 15px;
+    transform-style: preserve-3d;
+    animation: spin 6s infinite linear;
+
+    .face {
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 22px;
+      font-weight: bold;
+      color: white;
+      border: 2px solid black;
+
+      &.front  { background: red;    color: black; transform: translateZ(12px); }
+      &.back   { background: orange; color: black; transform: rotateY(180deg) translateZ(12px); }
+      &.right  { background: blue;   color: black; transform: rotateY(90deg)   translateZ(12px); }
+      &.left   { background: green;  color: black; transform: rotateY(-90deg)  translateZ(12px); }
+      &.top    { background: white;  color: black; transform: rotateX(90deg)   translateZ(12px); }
+      &.bottom { background: yellow; color: black; transform: rotateX(-90deg)  translateZ(12px); }
+    }
+  }
+}
+
+@keyframes spin {
+  0%   { transform: rotateX(0deg)   rotateY(0deg); }
+  50%  { transform: rotateX(180deg) rotateY(180deg); }
+  100% { transform: rotateX(360deg) rotateY(360deg); }
+}
+
+/* ============================================================
+   TOGGLE SWITCH  (3×3 ↔ 2×2)
+   ============================================================ */
+
+.switch {
+  margin-top: 60px;
+
+  .slider { }
+
+  .off { transition: transform 0.2s, opacity 0.2s; }
+  .on  { opacity: 0; transition: transform 0.2s, opacity 0.2s; }
+}
+
+/* :has() — toggle state drives everything */
+body:has(#toggleSize:checked) {
+  .switch {
+    .slider { background-color: rgba(255, 255, 255, 0.1); }
+    .off    { transform: translateX(1.8em); opacity: 0; }
+    .on     { transform: translateX(1.8em); opacity: 1; }
+  }
+
+  #wrapper3x3 { display: none; }
+  #wrapper2x2 { display: block; }
+}
+
+/* ============================================================
+   WRAPPER VISIBILITY DEFAULTS
+   ============================================================ */
+
+#wrapper3x3 { display: block; }
+#wrapper2x2 { display: none; }
+
+h2 {
+  position: absolute;
+  color: rgba(255, 255, 255, 0.1);
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  font-size: 15em;
+  width: 100vw;
+  text-align: center;
+}
+
+/* ============================================================
+   ROTATION SLIDERS
+   ============================================================ */
+
+input[type="range"].slider-h,
+input[type="range"].slider-v {
+  -webkit-appearance: none;
+  appearance: none;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+  outline: none;
+  padding: 0;
+  margin: 0;
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.85);
+    cursor: pointer;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+    transition: background 0.15s, box-shadow 0.15s;
+
+    &:hover {
+      background: white;
+      box-shadow: 0 0 16px rgba(255, 255, 255, 0.5);
+    }
+  }
+}
+
+.slider-h {
+  position: fixed;
+  bottom: calc(50vh - min(45vw, 45vh) - 36px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(70vw, 70vh);
+  height: 4px;
+  cursor: ew-resize;
+  z-index: 100;
+}
+
+.slider-v {
+  position: fixed;
+  right: calc(50vw - min(45vw, 45vh) - 4px);
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: min(70vw, 70vh);
+  writing-mode: vertical-lr;
+  direction: rtl;
+  cursor: ns-resize;
+  z-index: 100;
+}
+
+/* ============================================================
+   3×3 SCENE & CUBE STATES
+   ============================================================ */
+
+#scene {
+  width: min(90vw, 90vh);
+  height: min(90vw, 90vh);
+  perspective: 1200px;
+  z-index: 1;
+}
+
+:is(
+  #cubeState_A, #cubeState_B, #cubeState_C,
+  #cubeState_D, #cubeState_E, #cubeState_V,
+  #cubeState_X, #cubeState_Y, #cubeState_Z
+) {
+  display: none;
+  position: relative;
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d;
+  left: 47%;
+  top: 50%;
+  transform:
+    rotateX(calc(var(--rotX3, -30) * 1deg))
+    rotateY(calc(var(--rotY3,  30) * 1deg));
+}
+
+
+:is(#cubeState_A, #cubeState_D) {
+  transform:
+    rotateX(calc(var(--rotX3, -30) * 1deg))
+    rotateY(calc((var(--rotY3, 30) - 90) * 1deg))
+    rotateZ(90deg)
+    translateY(0px)
+    translateZ(-50px)
+    translateX(20px);
+}
+
+#cubeState_C {
+  transform:
+    rotateX(calc(var(--rotX3, -30) * 1deg))
+    rotateY(calc(var(--rotY3, 30) * 1deg))
+    rotateZ(90deg)
+    translateY(-61px);
+}
+
+body:has(#sV:checked) #cubeState_V { display: block; }
+body:has(#sX:checked) #cubeState_X { display: block; }
+body:has(#sY:checked) #cubeState_Y { display: block; }
+body:has(#sZ:checked) #cubeState_Z { display: block; }
+body:has(#sA:checked) #cubeState_A { display: block; }
+body:has(#sB:checked) #cubeState_B { display: block; }
+body:has(#sC:checked) #cubeState_C { display: block; }
+body:has(#sD:checked) #cubeState_D { display: block; }
+body:has(#sE:checked) #cubeState_E { display: block; }
+
+/* ============================================================
+   LAYERS
+   ============================================================ */
+
+.layer {
+  position: absolute;
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d;
+
+  &.top { transform: translateY(-70px); }
+  &.mid { transform: translateY(  0px); }
+  &.bot { transform: translateY( 70px); }
+}
+
+/* ============================================================
+   CUBIES  (.layer > div)
+   ============================================================ */
+
+.layer > div {
+  position: absolute;
+  width: 90px;
+  height: 60px;
+  transform-style: preserve-3d;
+  transform: translate3d(var(--x), 0px, var(--z));
+
+  /* X positions */
+  &:nth-child(3n+1) { --x: -70px; }
+  &:nth-child(3n+2) { --x:   0px; }
+  &:nth-child(3n)   { --x:  70px; }
+
+  /* Z positions */
+  &:nth-child(-n+3)              { --z:  70px; }
+  &:nth-child(n+4):nth-child(-n+6) { --z:   0px; }
+  &:nth-child(n+7)               { --z: -70px; }
+}
+
+/* ============================================================
+   FACES  (.layer > div > div)
+   ============================================================ */
+
+.layer > div > div {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border: 1.5px solid rgb(0, 0, 0);
+  backface-visibility: hidden;
+
+  &:nth-child(1) { transform: translateZ(30px); }
+  &:nth-child(2) { transform: rotateY(180deg)  translateZ(30px); }
+  &:nth-child(3) { transform: rotateY( 90deg)  translateZ(30px); }
+  &:nth-child(4) { transform: rotateY(-90deg)  translateZ(30px); }
+  &:nth-child(5) { transform: rotateX( 90deg)  translateZ(30px); }
+  &:nth-child(6) { transform: rotateX(-90deg)  translateZ(30px); }
+}
+
+/* ============================================================
+   FACE COLOR
+   ============================================================ */
+
+.layer > div > div:nth-child(1) { background: var(--face1); }
+.layer > div > div:nth-child(2) { background: var(--face2); }
+.layer > div > div:nth-child(3) { background: var(--face3); }
+.layer > div > div:nth-child(4) { background: var(--face4); }
+.layer > div > div:nth-child(5) { background: var(--face5); }
+.layer > div > div:nth-child(6) { background: var(--face6); }
+
+/* ---------- STATE A ---------- */
+#cubeState_A {
+  .layer.top {
+    > div:nth-child(1) > div { --face1:green; --face2:blue;    --face3:white;  --face4:yellow; --face5:orange; --face6:red;  }
+    > div:nth-child(2) > div { --face1:green; --face2:blue;    --face3:white;  --face4:yellow; --face5:orange; --face6:red;  }
+    > div:nth-child(3) > div { --face1:red;   --face2:orange;  --face3:green; --face4:blue;--face5:yellow;    --face6:white; }
+    > div:nth-child(4) > div { --face1:green; --face2:blue;    --face3:white;  --face4:yellow; --face5:orange; --face6:red; }
+    > div:nth-child(5) > div { --face1:green; --face2:blue;    --face3:white;  --face4:yellow; --face5:orange; --face6:red; }
+    > div:nth-child(6) > div { --face1:red;   --face2:orange;  --face3:green; --face4:blue;--face5:yellow;    --face6:white; }
+    > div:nth-child(7) > div { --face1:yellow; --face2:white;  --face3:orange; --face4:red;  --face5:blue; --face6:green;    }
+    > div:nth-child(8) > div { --face1:yellow; --face2:white;  --face3:orange; --face4:red;  --face5:blue; --face6:green;      }
+    > div:nth-child(9) > div { --face1:green; --face2:blue;  --face3:orange; --face4:red;  --face5:yellow; --face6:white;    }
+  }
+  .layer.mid {
+    > div:nth-child(1) > div { --face1:red; --face2:orange;    --face3:yellow;  --face4:white; --face5:blue; --face6:green;  }
+    > div:nth-child(2) > div { --face1:blue; --face2:green;    --face3:yellow;  --face4:white; --face5:orange; --face6:red;  }
+    > div:nth-child(3) > div { --face1:blue; --face2:green;    --face3:yellow;  --face4:white; --face5:orange; --face6:red;  }
+    > div:nth-child(4) > div { --face1:red; --face2:orange;    --face3:yellow;  --face4:white; --face5:blue; --face6:green; }
+    > div:nth-child(6) > div { --face1:blue; --face2:green;    --face3:yellow;  --face4:white; --face5:orange; --face6:red;   }
+    > div:nth-child(7) > div { --face1:red; --face2:orange;    --face3:green; --face4:blue;  --face5:yellow;  --face6:white; }
+    > div:nth-child(8) > div { --face1:blue; --face2:green;    --face3:red; --face4:orange;  --face5:yellow;  --face6:white; }
+    > div:nth-child(9) > div { --face1:blue; --face2:green;    --face3:red; --face4:orange;  --face5:yellow;  --face6:white;    }
+  }
+  .layer.bot {
+    > div:nth-child(1) > div { --face1:blue; --face2:green;    --face3:red; --face4:orange;  --face5:yellow;  --face6:white;   }
+    > div:nth-child(2) > div {  --face1:blue; --face2:green;    --face3:yellow;  --face4:white; --face5:orange; --face6:red;   }
+    > div:nth-child(3) > div {  --face1:blue; --face2:green;    --face3:yellow;  --face4:white; --face5:orange; --face6:red;  }
+    > div:nth-child(4) > div { --face1:blue; --face2:green;    --face3:red; --face4:orange;  --face5:yellow;  --face6:white;  }
+    > div:nth-child(5) > div { --face1:blue; --face2:green;    --face3:yellow;  --face4:white; --face5:orange; --face6:red; }
+    > div:nth-child(6) > div { --face1:blue; --face2:green;    --face3:yellow;  --face4:white; --face5:orange; --face6:red; }
+    > div:nth-child(7) > div { --face1:blue; --face2:green;    --face3:red; --face4:orange;  --face5:yellow;  --face6:white;  }
+    > div:nth-child(8) > div { --face1:blue; --face2:green;    --face3:red; --face4:orange;  --face5:yellow;  --face6:white;  }
+    > div:nth-child(9) > div { --face1:blue; --face2:green;    --face3:red; --face4:orange;  --face5:yellow;  --face6:white;    }
+  }
+}
+
+/* ---------- STATE B ---------- */
+#cubeState_B {
+  .layer.top {
+    > div:nth-child(1) > div { --face1:blue;   --face2:green;  --face3:orange;--face4:red;   --face5:white;  --face6:yellow; }
+    > div:nth-child(2) > div { --face1:blue;   --face2:green;  --face3:orange;--face4:red;   --face5:white;  --face6:yellow; }
+    > div:nth-child(3) > div { --face1:yellow; --face2:white;  --face3:orange;--face4:red;   --face5:blue;   --face6:green;  }
+    > div:nth-child(4) > div { --face1:blue;   --face2:green;  --face3:orange;--face4:red;   --face5:white;  --face6:yellow; }
+    > div:nth-child(5) > div { --face1:blue;   --face2:green;  --face3:orange;--face4:red;   --face5:white;  --face6:yellow; }
+    > div:nth-child(6) > div { --face1:yellow; --face2:white;  --face3:orange;--face4:red;   --face5:blue;   --face6:green;  }
+    > div:nth-child(7) > div { --face1:yellow; --face2:white;  --face3:green; --face4:blue;  --face5:orange; --face6:red;    }
+    > div:nth-child(8) > div { --face1:yellow; --face2:white;  --face3:green; --face4:blue;  --face5:orange; --face6:red;    }
+    > div:nth-child(9) > div { --face1:yellow; --face2:white;  --face3:green; --face4:blue;  --face5:orange; --face6:red;    }
+  }
+  .layer.mid {
+    > div:nth-child(1) > div { --face1:orange; --face2:red;    --face3:white; --face4:yellow;--face5:blue;   --face6:green;  }
+    > div:nth-child(2) > div { --face1:orange; --face2:red;    --face3:white; --face4:yellow;--face5:blue;   --face6:green;  }
+    > div:nth-child(3) > div { --face1:yellow; --face2:white;  --face3:green; --face4:blue;  --face5:orange; --face6:red;    }
+    > div:nth-child(4) > div { --face1:orange; --face2:red;    --face3:green; --face4:blue;  --face5:white;  --face6:yellow; }
+    > div:nth-child(6) > div { --face1:yellow; --face2:white;  --face3:green; --face4:blue;  --face5:orange; --face6:red;    }
+    > div:nth-child(7) > div { --face1:orange; --face2:red;    --face3:green; --face4:blue;  --face5:white;  --face6:yellow; }
+    > div:nth-child(8) > div { --face1:orange; --face2:red;    --face3:green; --face4:blue;  --face5:white;  --face6:yellow; }
+    > div:nth-child(9) > div { --face1:yellow; --face2:white;  --face3:green; --face4:blue;  --face5:orange; --face6:red;    }
+  }
+  .layer.bot {
+    > div:nth-child(1) > div { --face1:orange; --face2:red;    --face3:white; --face4:yellow;--face5:blue;   --face6:green;  }
+    > div:nth-child(2) > div { --face1:orange; --face2:red;    --face3:white; --face4:yellow;--face5:blue;   --face6:green;  }
+    > div:nth-child(3) > div { --face1:yellow; --face2:white;  --face3:green; --face4:blue;  --face5:orange; --face6:red;    }
+    > div:nth-child(4) > div { --face1:orange; --face2:red;    --face3:green; --face4:blue;  --face5:white;  --face6:yellow; }
+    > div:nth-child(5) > div { --face1:orange; --face2:red;    --face3:green; --face4:blue;  --face5:white;  --face6:yellow; }
+    > div:nth-child(6) > div { --face1:orange; --face2:red;    --face3:green; --face4:blue;  --face5:white;  --face6:yellow; }
+    > div:nth-child(7) > div { --face1:orange; --face2:red;    --face3:green; --face4:blue;  --face5:white;  --face6:yellow; }
+    > div:nth-child(8) > div { --face1:orange; --face2:red;    --face3:green; --face4:blue;  --face5:white;  --face6:yellow; }
+    > div:nth-child(9) > div { --face1:yellow; --face2:white;  --face3:green; --face4:blue;  --face5:orange; --face6:red;    }
+  }
+}
+
+/* ---------- STATE C ---------- */
+#cubeState_C {
+  .layer.top {
+    > div:nth-child(1) > div { --face1:green; --face2:blue;    --face3:red; --face4:orange;--face5:white;   --face6:yellow;  }
+    > div:nth-child(2) > div { --face1:yellow; --face2:white;    --face3:red; --face4:orange;--face5:green;   --face6:blue;  }
+    > div:nth-child(3) > div { --face1:yellow; --face2:white;    --face3:red; --face4:orange;--face5:green;   --face6:blue;     }
+    > div:nth-child(4) > div { --face1:green; --face2:blue;    --face3:red; --face4:orange;--face5:white;   --face6:yellow; }
+    > div:nth-child(5) > div { --face1:yellow; --face2:white;    --face3:red; --face4:orange;--face5:green;   --face6:blue;  }
+    > div:nth-child(6) > div { --face1:yellow; --face2:white;    --face3:red; --face4:orange;--face5:green;   --face6:blue;     }
+    > div:nth-child(7) > div { --face1:green; --face2:blue;    --face3:red; --face4:orange;--face5:white;   --face6:yellow; }
+    > div:nth-child(8) > div { --face1:yellow; --face2:white;    --face3:red; --face4:orange;--face5:green;   --face6:blue; }
+    > div:nth-child(9) > div { --face1:yellow; --face2:white;    --face3:red; --face4:orange;--face5:green;   --face6:blue;    }
+  }
+  .layer.mid {
+    > div:nth-child(1) > div { --face1:orange; --face2:red;    --face3:green; --face4:blue;--face5:white;   --face6:yellow; }
+    > div:nth-child(2) > div { --face1:orange; --face2:red;    --face3:green; --face4:blue;--face5:white;   --face6:yellow;  }
+    > div:nth-child(3) > div { --face1:orange; --face2:red;    --face3:green; --face4:blue;--face5:white;   --face6:yellow;  }
+    > div:nth-child(4) > div { --face1:orange; --face2:red;    --face3:yellow; --face4:white;  --face5:green;  --face6:blue; }
+    > div:nth-child(6) > div { --face1:orange; --face2:red;    --face3:yellow; --face4:white;  --face5:green;  --face6:blue;   }
+    > div:nth-child(7) > div { --face1:orange; --face2:red;    --face3:yellow; --face4:white;  --face5:green;  --face6:blue; }
+    > div:nth-child(8) > div { --face1:orange; --face2:red;    --face3:yellow; --face4:white;  --face5:green;  --face6:blue; }
+    > div:nth-child(9) > div { --face1:orange; --face2:red;    --face3:yellow; --face4:white;  --face5:green;  --face6:blue;    }
+  }
+  .layer.bot {
+    > div:nth-child(1) > div { --face1:orange; --face2:red;    --face3:green; --face4:blue;--face5:white;   --face6:yellow;  }
+    > div:nth-child(2) > div { --face1:orange; --face2:red;    --face3:green; --face4:blue;--face5:white;   --face6:yellow;  }
+    > div:nth-child(3) > div {--face1:orange; --face2:red;    --face3:green; --face4:blue;--face5:white;   --face6:yellow;   }
+    > div:nth-child(4) > div { --face1:orange; --face2:red;    --face3:yellow; --face4:white;  --face5:green;  --face6:blue; }
+    > div:nth-child(5) > div { --face1:orange; --face2:red;    --face3:yellow; --face4:white;  --face5:green;  --face6:blue; }
+    > div:nth-child(6) > div {--face1:orange; --face2:red;    --face3:yellow; --face4:white;  --face5:green;  --face6:blue; }
+    > div:nth-child(7) > div { --face1:orange; --face2:red;    --face3:yellow; --face4:white;  --face5:green;  --face6:blue; }
+    > div:nth-child(8) > div { --face1:orange; --face2:red;    --face3:yellow; --face4:white;  --face5:green;  --face6:blue; }
+    > div:nth-child(9) > div { --face1:orange; --face2:red;    --face3:yellow; --face4:white;  --face5:green;  --face6:blue;    }
+  }
+}
+
+/* ---------- STATE D ---------- */
+#cubeState_D {
+  .layer.top {
+    > div:nth-child(1) > div { --face1:yellow; --face2:white;    --face3:green; --face4:blue;--face5:orange;   --face6:red;  }
+    > div:nth-child(2) > div { --face1:yellow; --face2:white;    --face3:green; --face4:blue;--face5:orange;   --face6:red;  }
+    > div:nth-child(3) > div {--face1:yellow; --face2:white;    --face3:green; --face4:blue;--face5:orange;   --face6:red;     }
+    > div:nth-child(4) > div { --face1:yellow; --face2:white;    --face3:green; --face4:blue;--face5:orange;   --face6:red; }
+    > div:nth-child(5) > div { --face1:yellow; --face2:white;    --face3:green; --face4:blue;--face5:orange;   --face6:red;  }
+    > div:nth-child(6) > div { --face1:yellow; --face2:white;    --face3:green; --face4:blue;--face5:orange;   --face6:red;     }
+    > div:nth-child(7) > div { --face1:yellow; --face2:white;    --face3:green; --face4:blue;--face5:orange;   --face6:red; }
+    > div:nth-child(8) > div { --face1:yellow; --face2:white;    --face3:green; --face4:blue;--face5:orange;   --face6:red; }
+    > div:nth-child(9) > div { --face1:yellow; --face2:white;    --face3:green; --face4:blue;--face5:orange;   --face6:red;   }
+  }
+  .layer.mid {
+    > div:nth-child(1) > div { --face1:blue; --face2:green;    --face3:yellow; --face4:white;--face5:orange;   --face6:red; }
+    > div:nth-child(2) > div {--face1:blue; --face2:green;    --face3:yellow; --face4:white;--face5:orange;   --face6:red;  }
+    > div:nth-child(3) > div { --face1:blue; --face2:green;    --face3:yellow; --face4:white;--face5:orange;   --face6:red;  }
+    > div:nth-child(4) > div { --face1:blue; --face2:green;    --face3:yellow; --face4:white;--face5:orange;   --face6:red; }
+    > div:nth-child(6) > div { --face1:blue; --face2:green;    --face3:yellow; --face4:white;--face5:orange;   --face6:red;   }
+    > div:nth-child(7) > div { --face1:blue; --face2:green;    --face3:yellow; --face4:white;--face5:orange;   --face6:red; }
+    > div:nth-child(8) > div { --face1:blue; --face2:green;    --face3:yellow; --face4:white;--face5:orange;   --face6:red; }
+    > div:nth-child(9) > div { --face1:blue; --face2:green;    --face3:yellow; --face4:white;--face5:orange;   --face6:red;    }
+  }
+  .layer.bot {
+    > div:nth-child(1) > div { --face1:blue; --face2:green;    --face3:yellow; --face4:white;--face5:orange;   --face6:red;  }
+    > div:nth-child(2) > div { --face1:blue; --face2:green;    --face3:yellow; --face4:white;--face5:orange;   --face6:red;  }
+    > div:nth-child(3) > div {--face1:blue; --face2:green;    --face3:yellow; --face4:white;--face5:orange;   --face6:red;   }
+    > div:nth-child(4) > div { --face1:blue; --face2:green;    --face3:yellow; --face4:white;--face5:orange;   --face6:red; }
+    > div:nth-child(5) > div { --face1:blue; --face2:green;    --face3:yellow; --face4:white;--face5:orange;   --face6:red; }
+    > div:nth-child(6) > div {--face1:blue; --face2:green;    --face3:yellow; --face4:white;--face5:orange;   --face6:red; }
+    > div:nth-child(7) > div { --face1:blue; --face2:green;    --face3:yellow; --face4:white;--face5:orange;   --face6:red; }
+    > div:nth-child(8) > div { --face1:blue; --face2:green;    --face3:yellow; --face4:white;--face5:orange;   --face6:red; }
+    > div:nth-child(9) > div { --face1:blue; --face2:green;    --face3:yellow; --face4:white;--face5:orange;   --face6:red;   }
+  }
+}
+
+
+/* ---------- STATE E  ---------- */
+#cubeState_E {
+  .layer > div > div {
+    --face1: orange;
+    --face2: red;
+    --face3: green;
+    --face4: blue;
+    --face5: white;
+    --face6: yellow;
+  }
+}
+
+/* ---------- STATE V ---------- */
+#cubeState_V {
+  .layer.top {
+    > div:nth-child(1) > div { --face1:white;  --face2:yellow; --face3:blue;  --face4:green; --face5:orange; --face6:red;    }
+    > div:nth-child(2) > div { --face1:white;  --face2:yellow; --face3:blue;  --face4:green; --face5:orange; --face6:red;    }
+    > div:nth-child(3) > div { --face1:white;  --face2:yellow; --face3:blue;  --face4:green; --face5:orange; --face6:red;    }
+    > div:nth-child(4) > div { --face1:white;  --face2:yellow; --face3:red;   --face4:orange;--face5:blue;   --face6:green;  }
+    > div:nth-child(5) > div { --face1:green;  --face2:blue;   --face3:red;   --face4:orange;--face5:white;  --face6:yellow; }
+    > div:nth-child(6) > div { --face1:green;  --face2:blue;   --face3:red;   --face4:orange;--face5:white;  --face6:yellow; }
+    > div:nth-child(7) > div { --face1:green;  --face2:blue;   --face3:yellow;--face4:white; --face5:red;    --face6:orange; }
+    > div:nth-child(8) > div { --face1:red;    --face2:orange; --face3:green; --face4:blue;  --face5:yellow; --face6:white;  }
+    > div:nth-child(9) > div { --face1:red;    --face2:orange; --face3:green; --face4:blue;  --face5:yellow; --face6:white;  }
+  }
+  .layer.mid {
+    > div:nth-child(1) > div { --face1:orange; --face2:red;    --face3:blue;  --face4:green; --face5:yellow; --face6:white;  }
+    > div:nth-child(2) > div { --face1:orange; --face2:red;    --face3:blue;  --face4:green; --face5:yellow; --face6:white;  }
+    > div:nth-child(3) > div { --face1:blue;   --face2:green;  --face3:white; --face4:yellow;--face5:red;    --face6:orange; }
+    > div:nth-child(4) > div { --face1:orange; --face2:red;    --face3:green; --face4:blue;  --face5:white;  --face6:yellow; }
+    > div:nth-child(6) > div { --face1:yellow; --face2:white;  --face3:green; --face4:blue;  --face5:orange; --face6:red;    }
+    > div:nth-child(7) > div { --face1:orange; --face2:red;    --face3:green; --face4:blue;  --face5:white;  --face6:yellow; }
+    > div:nth-child(8) > div { --face1:red;    --face2:orange; --face3:yellow;--face4:white; --face5:blue;   --face6:green;  }
+    > div:nth-child(9) > div { --face1:yellow; --face2:white;  --face3:blue;  --face4:green; --face5:red;    --face6:orange; }
+  }
+  .layer.bot {
+    > div:nth-child(1) > div { --face1:blue;   --face2:green;  --face3:white; --face4:yellow;--face5:red;    --face6:orange; }
+    > div:nth-child(2) > div { --face1:green;  --face2:blue;   --face3:white; --face4:yellow;--face5:orange; --face6:red;    }
+    > div:nth-child(3) > div { --face1:green;  --face2:blue;   --face3:white; --face4:yellow;--face5:orange; --face6:red;    }
+    > div:nth-child(4) > div { --face1:orange; --face2:red;    --face3:white; --face4:yellow;--face5:blue;   --face6:green;  }
+    > div:nth-child(5) > div { --face1:green;  --face2:blue;   --face3:red;   --face4:orange;--face5:white;  --face6:yellow; }
+    > div:nth-child(6) > div { --face1:green;  --face2:blue;   --face3:red;   --face4:orange;--face5:white;  --face6:yellow; }
+    > div:nth-child(7) > div { --face1:orange; --face2:red;    --face3:white; --face4:yellow;--face5:blue;   --face6:green;  }
+    > div:nth-child(8) > div { --face1:green;  --face2:blue;   --face3:red;   --face4:orange;--face5:white;  --face6:yellow; }
+    > div:nth-child(9) > div { --face1:green;  --face2:blue;   --face3:red;   --face4:orange;--face5:white;  --face6:yellow; }
+  }
+}
+
+/* ---------- STATE X ---------- */
+#cubeState_X {
+  .layer.top {
+    > div:nth-child(1) > div { --face1:white;  --face2:yellow; --face3:blue;  --face4:green; --face5:orange; --face6:red;    }
+    > div:nth-child(2) > div { --face1:white;  --face2:yellow; --face3:blue;  --face4:green; --face5:orange; --face6:red;    }
+    > div:nth-child(3) > div { --face1:white;  --face2:yellow; --face3:blue;  --face4:green; --face5:orange; --face6:red;    }
+    > div:nth-child(4) > div { --face1:white;  --face2:yellow; --face3:red;   --face4:orange;--face5:blue;   --face6:green;  }
+    > div:nth-child(5) > div { --face1:green;  --face2:blue;   --face3:red;   --face4:orange;--face5:white;  --face6:yellow; }
+    > div:nth-child(6) > div { --face1:green;  --face2:blue;   --face3:red;   --face4:orange;--face5:white;  --face6:yellow; }
+    > div:nth-child(7) > div { --face1:green;  --face2:blue;   --face3:yellow;--face4:white; --face5:red;    --face6:orange; }
+    > div:nth-child(8) > div { --face1:red;    --face2:orange; --face3:green; --face4:blue;  --face5:yellow; --face6:white;  }
+    > div:nth-child(9) > div { --face1:red;    --face2:orange; --face3:green; --face4:blue;  --face5:yellow; --face6:white;  }
+  }
+  .layer.mid {
+    > div:nth-child(1) > div { --face1:orange; --face2:red;    --face3:blue;  --face4:green; --face5:yellow; --face6:white;  }
+    > div:nth-child(2) > div { --face1:orange; --face2:red;    --face3:blue;  --face4:green; --face5:yellow; --face6:white;  }
+    > div:nth-child(3) > div { --face1:blue;   --face2:green;  --face3:white; --face4:yellow;--face5:red;    --face6:orange; }
+    > div:nth-child(4) > div { --face1:orange; --face2:red;    --face3:green; --face4:blue;  --face5:white;  --face6:yellow; }
+    > div:nth-child(6) > div { --face1:yellow; --face2:white;  --face3:green; --face4:blue;  --face5:orange; --face6:red;    }
+    > div:nth-child(7) > div { --face1:orange; --face2:red;    --face3:green; --face4:blue;  --face5:white;  --face6:yellow; }
+    > div:nth-child(8) > div { --face1:red;    --face2:orange; --face3:yellow;--face4:white; --face5:blue;   --face6:green;  }
+    > div:nth-child(9) > div { --face1:yellow; --face2:white;  --face3:blue;  --face4:green; --face5:red;    --face6:orange; }
+  }
+  .layer.bot {
+    > div:nth-child(1) > div { --face1:blue;   --face2:green;  --face3:white; --face4:yellow;--face5:red;    --face6:orange; }
+    > div:nth-child(2) > div { --face1:green;  --face2:blue;   --face3:white; --face4:yellow;--face5:orange; --face6:red;    }
+    > div:nth-child(3) > div { --face1:green;  --face2:blue;   --face3:white; --face4:yellow;--face5:orange; --face6:red;    }
+    > div:nth-child(4) > div { --face1:orange; --face2:red;    --face3:white; --face4:yellow;--face5:blue;   --face6:green;  }
+    > div:nth-child(5) > div { --face1:green;  --face2:blue;   --face3:red;   --face4:orange;--face5:white;  --face6:yellow; }
+    > div:nth-child(6) > div { --face1:green;  --face2:blue;   --face3:red;   --face4:orange;--face5:white;  --face6:yellow; }
+    > div:nth-child(7) > div { --face1:orange; --face2:red;    --face3:white; --face4:yellow;--face5:blue;   --face6:green;  }
+    > div:nth-child(8) > div { --face1:green;  --face2:blue;   --face3:red;   --face4:orange;--face5:white;  --face6:yellow; }
+    > div:nth-child(9) > div { --face1:green;  --face2:blue;   --face3:red;   --face4:orange;--face5:white;  --face6:yellow; }
+  }
+}
+
+/* ---------- STATE Y ---------- */
+#cubeState_Y {
+  .layer.top {
+    > div:nth-child(1) > div { --face1:blue;   --face2:green;  --face3:yellow;--face4:white; --face5:orange; --face6:red;    }
+    > div:nth-child(2) > div { --face1:red;    --face2:orange; --face3:blue;  --face4:green; --face5:white;  --face6:yellow; }
+    > div:nth-child(3) > div { --face1:green;  --face2:blue;   --face3:orange;--face4:red;   --face5:yellow; --face6:white;  }
+    > div:nth-child(4) > div { --face1:blue;   --face2:green;  --face3:yellow;--face4:white; --face5:orange; --face6:red;    }
+    > div:nth-child(5) > div { --face1:red;    --face2:orange; --face3:blue;  --face4:green; --face5:white;  --face6:yellow; }
+    > div:nth-child(6) > div { --face1:green;  --face2:blue;   --face3:orange;--face4:red;   --face5:yellow; --face6:white;  }
+    > div:nth-child(7) > div { --face1:blue;   --face2:green;  --face3:yellow;--face4:white; --face5:orange; --face6:red;    }
+    > div:nth-child(8) > div { --face1:red;    --face2:orange; --face3:yellow;--face4:white; --face5:blue;   --face6:green;  }
+    > div:nth-child(9) > div { --face1:yellow; --face2:white;  --face3:blue;  --face4:green; --face5:red;    --face6:orange; }
+  }
+  .layer.mid {
+    > div:nth-child(1) > div { --face1:orange; --face2:red;    --face3:blue;  --face4:green; --face5:yellow; --face6:white;  }
+    > div:nth-child(2) > div { --face1:orange; --face2:red;    --face3:blue;  --face4:green; --face5:yellow; --face6:white;  }
+    > div:nth-child(3) > div { --face1:blue;   --face2:green;  --face3:white; --face4:yellow;--face5:red;    --face6:orange; }
+    > div:nth-child(4) > div { --face1:orange; --face2:red;    --face3:green; --face4:blue;  --face5:white;  --face6:yellow; }
+    > div:nth-child(6) > div { --face1:yellow; --face2:white;  --face3:green; --face4:blue;  --face5:orange; --face6:red;    }
+    > div:nth-child(7) > div { --face1:orange; --face2:red;    --face3:green; --face4:blue;  --face5:white;  --face6:yellow; }
+    > div:nth-child(8) > div { --face1:red;    --face2:orange; --face3:yellow;--face4:white; --face5:blue;   --face6:green;  }
+    > div:nth-child(9) > div { --face1:yellow; --face2:white;  --face3:blue;  --face4:green; --face5:red;    --face6:orange; }
+  }
+  .layer.bot {
+    > div:nth-child(1) > div { --face1:blue;   --face2:green;  --face3:white; --face4:yellow;--face5:red;    --face6:orange; }
+    > div:nth-child(2) > div { --face1:green;  --face2:blue;   --face3:white; --face4:yellow;--face5:orange; --face6:red;    }
+    > div:nth-child(3) > div { --face1:green;  --face2:blue;   --face3:white; --face4:yellow;--face5:orange; --face6:red;    }
+    > div:nth-child(4) > div { --face1:orange; --face2:red;    --face3:white; --face4:yellow;--face5:blue;   --face6:green;  }
+    > div:nth-child(5) > div { --face1:green;  --face2:blue;   --face3:red;   --face4:orange;--face5:white;  --face6:yellow; }
+    > div:nth-child(6) > div { --face1:green;  --face2:blue;   --face3:red;   --face4:orange;--face5:white;  --face6:yellow; }
+    > div:nth-child(7) > div { --face1:orange; --face2:red;    --face3:white; --face4:yellow;--face5:blue;   --face6:green;  }
+    > div:nth-child(8) > div { --face1:green;  --face2:blue;   --face3:red;   --face4:orange;--face5:white;  --face6:yellow; }
+    > div:nth-child(9) > div { --face1:green;  --face2:blue;   --face3:red;   --face4:orange;--face5:white;  --face6:yellow; }
+  }
+}
+
+/* ---------- STATE Z ---------- */
+#cubeState_Z {
+  .layer.top {
+    > div:nth-child(1) > div { --face1:orange; --face2:red;    --face3:blue;  --face4:green; --face5:yellow; --face6:white;  }
+    > div:nth-child(2) > div { --face1:orange; --face2:red;    --face3:blue;  --face4:green; --face5:yellow; --face6:white;  }
+    > div:nth-child(3) > div { --face1:blue;   --face2:green;  --face3:white; --face4:yellow;--face5:red;    --face6:orange; }
+    > div:nth-child(4) > div { --face1:blue;   --face2:green;  --face3:orange;--face4:red;   --face5:white;  --face6:yellow; }
+    > div:nth-child(5) > div { --face1:blue;   --face2:green;  --face3:orange;--face4:red;   --face5:white;  --face6:yellow; }
+    > div:nth-child(6) > div { --face1:yellow; --face2:white;  --face3:orange;--face4:red;   --face5:blue;   --face6:green;  }
+    > div:nth-child(7) > div { --face1:yellow; --face2:white;  --face3:green; --face4:blue;  --face5:orange; --face6:red;    }
+    > div:nth-child(8) > div { --face1:yellow; --face2:white;  --face3:green; --face4:blue;  --face5:orange; --face6:red;    }
+    > div:nth-child(9) > div { --face1:yellow; --face2:white;  --face3:green; --face4:blue;  --face5:orange; --face6:red;    }
+  }
+  .layer.mid {
+    > div:nth-child(1) > div { --face1:orange; --face2:red;    --face3:blue;  --face4:green; --face5:yellow; --face6:white;  }
+    > div:nth-child(2) > div { --face1:orange; --face2:red;    --face3:blue;  --face4:green; --face5:yellow; --face6:white;  }
+    > div:nth-child(3) > div { --face1:blue;   --face2:green;  --face3:white; --face4:yellow;--face5:red;    --face6:orange; }
+    > div:nth-child(4) > div { --face1:orange; --face2:red;    --face3:green; --face4:blue;  --face5:white;  --face6:yellow; }
+    > div:nth-child(6) > div { --face1:yellow; --face2:white;  --face3:green; --face4:blue;  --face5:orange; --face6:red;    }
+    > div:nth-child(7) > div { --face1:orange; --face2:red;    --face3:green; --face4:blue;  --face5:white;  --face6:yellow; }
+    > div:nth-child(8) > div { --face1:orange; --face2:red;    --face3:green; --face4:blue;  --face5:white;  --face6:yellow; }
+    > div:nth-child(9) > div { --face1:yellow; --face2:white;  --face3:green; --face4:blue;  --face5:orange; --face6:red;    }
+  }
+  .layer.bot {
+    > div:nth-child(1) > div { --face1:blue;   --face2:green;  --face3:white; --face4:yellow;--face5:red;    --face6:orange; }
+    > div:nth-child(2) > div { --face1:green;  --face2:blue;   --face3:white; --face4:yellow;--face5:orange; --face6:red;    }
+    > div:nth-child(3) > div { --face1:green;  --face2:blue;   --face3:white; --face4:yellow;--face5:orange; --face6:red;    }
+    > div:nth-child(4) > div { --face1:orange; --face2:red;    --face3:white; --face4:yellow;--face5:blue;   --face6:green;  }
+    > div:nth-child(5) > div { --face1:green;  --face2:blue;   --face3:red;   --face4:orange;--face5:white;  --face6:yellow; }
+    > div:nth-child(6) > div { --face1:green;  --face2:blue;   --face3:red;   --face4:orange;--face5:white;  --face6:yellow; }
+    > div:nth-child(7) > div { --face1:orange; --face2:red;    --face3:white; --face4:yellow;--face5:blue;   --face6:green;  }
+    > div:nth-child(8) > div { --face1:green;  --face2:blue;   --face3:red;   --face4:orange;--face5:white;  --face6:yellow; }
+    > div:nth-child(9) > div { --face1:green;  --face2:blue;   --face3:red;   --face4:orange;--face5:white;  --face6:yellow; }
+  }
+}
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+
+@keyframes rotateTopLayer {
+  from { transform: translateY(-70px) rotateY(0deg); }
+  to   { transform: translateY(-70px) translateX(31px) translateZ(-31px) rotateY(-90deg); }
+}
+
+@keyframes rotateTopLayerRevers {
+  from { transform: translateY(-70px) rotateY(0deg); }
+  to   { transform: translateY(-70px) translateX(31px) translateZ(31px) rotateY(90deg); }
+}
+
+@keyframes rotateBottomLayer {
+  from { transform: translateY(70px) rotateY(0deg); }
+  to   { transform: translateY(70px) translateX(31px) translateZ(31px) rotateY(90deg); }
+}
+
+@keyframes spinCube {
+  from { transform: rotateX(-30deg) rotateY(0deg); }
+  to   { transform: rotateX(-30deg) rotateY(360deg); }
+}
+
+body:has(#sB:checked) #cubeState_B .layer.top,
+body:has(#sX:checked) #cubeState_X .layer.top,
+body:has(#sY:checked) #cubeState_Y .layer.top {
+  animation: rotateTopLayer 2s ease-in-out forwards;
+}
+
+body:has(#sA:checked) #cubeState_A .layer.top{
+    animation: rotateTopLayerRevers 2s ease-in-out forwards;
+}
+
+body:has(#sC:checked) #cubeState_C .layer.top,
+body:has(#sD:checked) #cubeState_D .layer.top {
+  animation: rotateTopLayerRevers 2s ease-in-out forwards;
+}
+
+body:has(#sZ:checked) #cubeState_Z .layer.bot {
+  animation: rotateBottomLayer 2s ease-in-out forwards;
+}
+
+body:has(#sE:checked) #cubeState_E {
+  animation: spinCube 5s infinite;
+}
+
+/* ============================================================
+   3×3 CONTROLS
+   ============================================================ */
+
+#controls {
+  margin-top: 10px;
+  margin-bottom: 4em;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+
+  > label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    background: #444;
+    color: #fff;
+    font-family: monospace;
+    font-size: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 2px solid #666;
+    transition: background 0.15s, border-color 0.15s;
+
+    &:hover { background: #555; }
+  }
+}
+
+
+body:has(#sV:checked) #controls label[for="sV"],
+body:has(#sX:checked) #controls label[for="sX"],
+body:has(#sY:checked) #controls label[for="sY"],
+body:has(#sZ:checked) #controls label[for="sZ"],
+body:has(#sA:checked) #controls label[for="sA"],
+body:has(#sB:checked) #controls label[for="sB"],
+body:has(#sC:checked) #controls label[for="sC"],
+body:has(#sD:checked) #controls label[for="sD"],
+body:has(#sE:checked) #controls label[for="sE"] {
+  background: #5a5a5a;
+  color: #000;
+  border-color: #575757;
+}
+
+/* ============================================================
+   2×2 SCENE
+   ============================================================ */
+
+#scene2 {
+  width: min(90vw, 90vh);
+  height: min(90vw, 90vh);
+  perspective: 1200px;
+  z-index: 1;
+  position: relative;
+  transform-style: preserve-3d;
+  transform:
+    rotateX(calc(var(--rotX2, -20) * 1deg))
+    rotateY(calc(var(--rotY2,  30) * 1deg));
+}
+
+/* All cube states hidden by default */
+[id^="cs2_"] {
+  display: none;
+  position: absolute;
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d;
+  left: 47%;
+  top: 50%;
+}
+
+body:has(#s2_0:checked)  #scene2 #cs2_0  { display: block; }
+body:has(#s2_1:checked)  #scene2 #cs2_1  { display: block; }
+body:has(#s2_2:checked)  #scene2 #cs2_2  { display: block; }
+body:has(#s2_3:checked)  #scene2 #cs2_3  { display: block; }
+body:has(#s2_4:checked)  #scene2 #cs2_4  { display: block; }
+body:has(#s2_5:checked)  #scene2 #cs2_5  { display: block; }
+body:has(#s2_6:checked)  #scene2 #cs2_6  { display: block; }
+body:has(#s2_7:checked)  #scene2 #cs2_7  { display: block; }
+body:has(#s2_8:checked)  #scene2 #cs2_8  { display: block; }
+body:has(#s2_9:checked)  #scene2 #cs2_9  { display: block; }
+body:has(#s2_10:checked) #scene2 #cs2_10 { display: block; }
+body:has(#s2_11:checked) #scene2 #cs2_11 { display: block; }
+body:has(#s2_12:checked) #scene2 #cs2_12 { display: block; }
+body:has(#s2_13:checked) #scene2 #cs2_13 { display: block; }
+body:has(#s2_14:checked) #scene2 #cs2_14 { display: block; }
+body:has(#s2_15:checked) #scene2 #cs2_15 { display: block; }
+body:has(#s2_16:checked) #scene2 #cs2_16 { display: block; }
+body:has(#s2_17:checked) #scene2 #cs2_17 { display: block; }
+body:has(#s2_18:checked) #scene2 #cs2_18 { display: block; }
+body:has(#s2_19:checked) #scene2 #cs2_19 { display: block; }
+body:has(#s2_20:checked) #scene2 #cs2_20 { display: block; }
+body:has(#s2_21:checked) #scene2 #cs2_21 { display: block; }
+body:has(#s2_22:checked) #scene2 #cs2_22 { display: block; }
+body:has(#s2_23:checked) #scene2 #cs2_23 { display: block; }
+body:has(#s2_24:checked) #scene2 #cs2_24 { display: block; }
+body:has(#s2_25:checked) #scene2 #cs2_25 { display: block; }
+body:has(#s2_26:checked) #scene2 #cs2_26 { display: block; }
+body:has(#s2_27:checked) #scene2 #cs2_27 { display: block; }
+body:has(#s2_28:checked) #scene2 #cs2_28 { display: block; }
+body:has(#s2_29:checked) #scene2 #cs2_29 { display: block; }
+body:has(#s2_30:checked) #scene2 #cs2_30 { display: block; }
+body:has(#s2_31:checked) #scene2 #cs2_31 { display: block; }
+body:has(#s2_32:checked) #scene2 #cs2_32 { display: block; }
+body:has(#s2_33:checked) #scene2 #cs2_33 { display: block; }
+body:has(#s2_34:checked) #scene2 #cs2_34 { display: block; }
+body:has(#s2_35:checked) #scene2 #cs2_35 { display: block; }
+body:has(#s2_36:checked) #scene2 #cs2_36 { display: block; }
+body:has(#s2_37:checked) #scene2 #cs2_37 { display: block; }
+body:has(#s2_38:checked) #scene2 #cs2_38 { display: block; }
+body:has(#s2_39:checked) #scene2 #cs2_39 { display: block; }
+body:has(#s2_40:checked) #scene2 #cs2_40 { display: block; }
+body:has(#s2_41:checked) #scene2 #cs2_41 { display: block; }
+body:has(#s2_42:checked) #scene2 #cs2_42 { display: block; }
+body:has(#s2_43:checked) #scene2 #cs2_43 { display: block; }
+body:has(#s2_44:checked) #scene2 #cs2_44 { display: block; }
+body:has(#s2_45:checked) #scene2 #cs2_45 { display: block; }
+body:has(#s2_46:checked) #scene2 #cs2_46 { display: block; }
+body:has(#s2_47:checked) #scene2 #cs2_47 { display: block; }
+body:has(#s2_48:checked) #scene2 #cs2_48 { display: block; }
+body:has(#s2_49:checked) #scene2 #cs2_49 { display: block; }
+body:has(#s2_50:checked) #scene2 #cs2_50 { display: block; }
+body:has(#s2_51:checked) #scene2 #cs2_51 { display: block; }
+body:has(#s2_52:checked) #scene2 #cs2_52 { display: block; }
+body:has(#s2_53:checked) #scene2 #cs2_53 { display: block; }
+body:has(#s2_54:checked) #scene2 #cs2_54 { display: block; }
+body:has(#s2_55:checked) #scene2 #cs2_55 { display: block; }
+body:has(#s2_56:checked) #scene2 #cs2_56 { display: block; }
+body:has(#s2_57:checked) #scene2 #cs2_57 { display: block; }
+body:has(#s2_58:checked) #scene2 #cs2_58 { display: block; }
+body:has(#s2_59:checked) #scene2 #cs2_59 { display: block; }
+body:has(#s2_60:checked) #scene2 #cs2_60 { display: block; }
+body:has(#s2_61:checked) #scene2 #cs2_61 { display: block; }
+body:has(#s2_62:checked) #scene2 #cs2_62 { display: block; }
+body:has(#s2_63:checked) #scene2 #cs2_63 { display: block; }
+body:has(#s2_64:checked) #scene2 #cs2_64 { display: block; }
+body:has(#s2_65:checked) #scene2 #cs2_65 { display: block; }
+body:has(#s2_66:checked) #scene2 #cs2_66 { display: block; }
+
+/* ============================================================
+   2×2 CUBIES 
+   ============================================================ */
+
+[id^="cs2_"] > div {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  transform-style: preserve-3d;
+
+  /* Front face cubies (1–4): positive Z */
+  &:nth-child(-n+4) { --z:  50px; }
+  /* Back face cubies (5–8): negative Z */
+  &:nth-child(n+5)  { --z: -50px; }
+
+  /* Top row (1,2,5,6): negative Y */
+  &:nth-child(1), &:nth-child(2),
+  &:nth-child(5), &:nth-child(6) { --y: -50px; }
+  /* Bottom row (3,4,7,8): positive Y */
+  &:nth-child(3), &:nth-child(4),
+  &:nth-child(7), &:nth-child(8) { --y:  50px; }
+
+  /* Left column (1,3,5,7): negative X */
+  &:nth-child(odd)  { --x: -50px; }
+  /* Right column (2,4,6,8): positive X */
+  &:nth-child(even) { --x:  50px; }
+
+  transform: translate3d(var(--x), var(--y), var(--z));
+}
+
+/* ============================================================
+   2×2 FACES 
+   ============================================================ */
+
+[id^="cs2_"] > div > div {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border: 2.5px solid #000;
+  backface-visibility: hidden;
+}
+
+[id^="cs2_"] > div:nth-child(-n+4) > div:nth-child(1) { transform: translateZ(50px); }
+[id^="cs2_"] > div:nth-child(n+5)  > div:nth-child(1) { transform: rotateY(180deg) translateZ(50px); }
+
+[id^="cs2_"] > div:nth-child(1) > div:nth-child(2),
+[id^="cs2_"] > div:nth-child(2) > div:nth-child(2),
+[id^="cs2_"] > div:nth-child(5) > div:nth-child(2),
+[id^="cs2_"] > div:nth-child(6) > div:nth-child(2) { transform: rotateX(90deg)  translateZ(50px); }
+
+[id^="cs2_"] > div:nth-child(3) > div:nth-child(2),
+[id^="cs2_"] > div:nth-child(4) > div:nth-child(2),
+[id^="cs2_"] > div:nth-child(7) > div:nth-child(2),
+[id^="cs2_"] > div:nth-child(8) > div:nth-child(2) { transform: rotateX(-90deg) translateZ(50px); }
+
+[id^="cs2_"] > div:nth-child(odd)  > div:nth-child(3) { transform: rotateY(-90deg) translateZ(50px); }
+[id^="cs2_"] > div:nth-child(even) > div:nth-child(3) { transform: rotateY( 90deg) translateZ(50px); }
+
+/* ============================================================
+   2×2 CONTROLS
+   ============================================================ */
+
+#controls2 {
+  margin-top: 10px;
+  margin-bottom: 4em;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.ctrl2 {
+  display: none;
+  gap: 8px;
+}
+
+
+body:has(#s2_0:checked)  #controls2 #ctrl2_0  { display: flex; }
+body:has(#s2_1:checked)  #controls2 #ctrl2_1  { display: flex; }
+body:has(#s2_2:checked)  #controls2 #ctrl2_2  { display: flex; }
+body:has(#s2_3:checked)  #controls2 #ctrl2_3  { display: flex; }
+body:has(#s2_4:checked)  #controls2 #ctrl2_4  { display: flex; }
+body:has(#s2_5:checked)  #controls2 #ctrl2_5  { display: flex; }
+body:has(#s2_6:checked)  #controls2 #ctrl2_6  { display: flex; }
+body:has(#s2_7:checked)  #controls2 #ctrl2_7  { display: flex; }
+body:has(#s2_8:checked)  #controls2 #ctrl2_8  { display: flex; }
+body:has(#s2_9:checked)  #controls2 #ctrl2_9  { display: flex; }
+body:has(#s2_10:checked) #controls2 #ctrl2_10 { display: flex; }
+body:has(#s2_11:checked) #controls2 #ctrl2_11 { display: flex; }
+body:has(#s2_12:checked) #controls2 #ctrl2_12 { display: flex; }
+body:has(#s2_13:checked) #controls2 #ctrl2_13 { display: flex; }
+body:has(#s2_14:checked) #controls2 #ctrl2_14 { display: flex; }
+body:has(#s2_15:checked) #controls2 #ctrl2_15 { display: flex; }
+body:has(#s2_16:checked) #controls2 #ctrl2_16 { display: flex; }
+body:has(#s2_17:checked) #controls2 #ctrl2_17 { display: flex; }
+body:has(#s2_18:checked) #controls2 #ctrl2_18 { display: flex; }
+body:has(#s2_19:checked) #controls2 #ctrl2_19 { display: flex; }
+body:has(#s2_20:checked) #controls2 #ctrl2_20 { display: flex; }
+body:has(#s2_21:checked) #controls2 #ctrl2_21 { display: flex; }
+body:has(#s2_22:checked) #controls2 #ctrl2_22 { display: flex; }
+body:has(#s2_23:checked) #controls2 #ctrl2_23 { display: flex; }
+body:has(#s2_24:checked) #controls2 #ctrl2_24 { display: flex; }
+body:has(#s2_25:checked) #controls2 #ctrl2_25 { display: flex; }
+body:has(#s2_26:checked) #controls2 #ctrl2_26 { display: flex; }
+body:has(#s2_27:checked) #controls2 #ctrl2_27 { display: flex; }
+body:has(#s2_28:checked) #controls2 #ctrl2_28 { display: flex; }
+body:has(#s2_29:checked) #controls2 #ctrl2_29 { display: flex; }
+body:has(#s2_30:checked) #controls2 #ctrl2_30 { display: flex; }
+body:has(#s2_31:checked) #controls2 #ctrl2_31 { display: flex; }
+body:has(#s2_32:checked) #controls2 #ctrl2_32 { display: flex; }
+body:has(#s2_33:checked) #controls2 #ctrl2_33 { display: flex; }
+body:has(#s2_34:checked) #controls2 #ctrl2_34 { display: flex; }
+body:has(#s2_35:checked) #controls2 #ctrl2_35 { display: flex; }
+body:has(#s2_36:checked) #controls2 #ctrl2_36 { display: flex; }
+body:has(#s2_37:checked) #controls2 #ctrl2_37 { display: flex; }
+body:has(#s2_38:checked) #controls2 #ctrl2_38 { display: flex; }
+body:has(#s2_39:checked) #controls2 #ctrl2_39 { display: flex; }
+body:has(#s2_40:checked) #controls2 #ctrl2_40 { display: flex; }
+body:has(#s2_41:checked) #controls2 #ctrl2_41 { display: flex; }
+body:has(#s2_42:checked) #controls2 #ctrl2_42 { display: flex; }
+body:has(#s2_43:checked) #controls2 #ctrl2_43 { display: flex; }
+body:has(#s2_44:checked) #controls2 #ctrl2_44 { display: flex; }
+body:has(#s2_45:checked) #controls2 #ctrl2_45 { display: flex; }
+body:has(#s2_46:checked) #controls2 #ctrl2_46 { display: flex; }
+body:has(#s2_47:checked) #controls2 #ctrl2_47 { display: flex; }
+body:has(#s2_48:checked) #controls2 #ctrl2_48 { display: flex; }
+body:has(#s2_49:checked) #controls2 #ctrl2_49 { display: flex; }
+body:has(#s2_50:checked) #controls2 #ctrl2_50 { display: flex; }
+body:has(#s2_51:checked) #controls2 #ctrl2_51 { display: flex; }
+body:has(#s2_52:checked) #controls2 #ctrl2_52 { display: flex; }
+body:has(#s2_53:checked) #controls2 #ctrl2_53 { display: flex; }
+body:has(#s2_54:checked) #controls2 #ctrl2_54 { display: flex; }
+body:has(#s2_55:checked) #controls2 #ctrl2_55 { display: flex; }
+body:has(#s2_56:checked) #controls2 #ctrl2_56 { display: flex; }
+body:has(#s2_57:checked) #controls2 #ctrl2_57 { display: flex; }
+body:has(#s2_58:checked) #controls2 #ctrl2_58 { display: flex; }
+body:has(#s2_59:checked) #controls2 #ctrl2_59 { display: flex; }
+body:has(#s2_60:checked) #controls2 #ctrl2_60 { display: flex; }
+body:has(#s2_61:checked) #controls2 #ctrl2_61 { display: flex; }
+body:has(#s2_62:checked) #controls2 #ctrl2_62 { display: flex; }
+body:has(#s2_63:checked) #controls2 #ctrl2_63 { display: flex; }
+body:has(#s2_64:checked) #controls2 #ctrl2_64 { display: flex; }
+body:has(#s2_65:checked) #controls2 #ctrl2_65 { display: flex; }
+body:has(#s2_66:checked) #controls2 #ctrl2_66 { display: flex; }
+
+.move2-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: #444;
+  color: #fff;
+  font-family: monospace;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 2px solid #666;
+  transition: background 0.15s, border-color 0.15s;
+  user-select: none;
+
+  &:hover { background: #555; }
+  &.disabled { opacity: 0.3; cursor: default; }
+}
