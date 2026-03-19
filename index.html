@@ -1,0 +1,3746 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<title>Rubik's Cube</title>
+<link rel="stylesheet" href="style3.css">
+</head>
+<body>
+
+
+<div class="text">
+  <!-- M -->
+  <div class="cube">
+    <div class="face front">M</div>
+    <div class="face back">M</div>
+    <div class="face right">M</div>
+    <div class="face left">M</div>
+    <div class="face top">M</div>
+    <div class="face bottom">M</div>
+  </div>
+
+  <!-- I -->
+  <div class="cube" style="animation-delay: 0.5s;">
+    <div class="face front">I</div>
+    <div class="face back">I</div>
+    <div class="face right">I</div>
+    <div class="face left">I</div>
+    <div class="face top">I</div>
+    <div class="face bottom">I</div>
+  </div>
+
+  <!-- C -->
+  <div class="cube" style="animation-delay: 1s;">
+    <div class="face front">C</div>
+    <div class="face back">C</div>
+    <div class="face right">C</div>
+    <div class="face left">C</div>
+    <div class="face top">C</div>
+    <div class="face bottom">C</div>
+  </div>
+
+  <!-- U -->
+  <div class="cube" style="animation-delay: 1.5s;">
+    <div class="face front">U</div>
+    <div class="face back">U</div>
+    <div class="face right">U</div>
+    <div class="face left">U</div>
+    <div class="face top">U</div>
+    <div class="face bottom">U</div>
+  </div>
+
+  <!-- B -->
+  <div class="cube" style="animation-delay: 2s;">
+    <div class="face front">B</div>
+    <div class="face back">B</div>
+    <div class="face right">B</div>
+    <div class="face left">B</div>
+    <div class="face top">B</div>
+    <div class="face bottom">B</div>
+  </div>
+
+  <!-- E -->
+  <div class="cube" style="animation-delay: 2.5s;">
+    <div class="face front">E</div>
+    <div class="face back">E</div>
+    <div class="face right">E</div>
+    <div class="face left">E</div>
+    <div class="face top">E</div>
+    <div class="face bottom">E</div>
+  </div>
+</div>
+
+</div>
+
+<input type="checkbox" id="toggleSize">
+ 
+<label class="switch" for="toggleSize">
+  <span class="toggle"></span>
+  <img src="3x3.png" class="off">
+  <img src="2x2.png" class="on">
+</label>
+
+<a href="https://www.linkedin.com/in/mitchell-scholte-a10652238/"><img src="me.png" width="1em" height="1em"></a>
+
+<div id="wrapper3x3">
+
+<h2>3X3</h2>
+
+<input type="radio" name="step" id="sV" checked>
+<input type="radio" name="step" id="sX">
+<input type="radio" name="step" id="sY">
+<input type="radio" name="step" id="sZ">
+<input type="radio" name="step" id="sA">
+<input type="radio" name="step" id="sB">
+<input type="radio" name="step" id="sC">
+<input type="radio" name="step" id="sD">
+<input type="radio" name="step" id="sE">
+
+<!-- 3x3 wrapper -->
+<input type="range" name="rotX3" min="-180" max="180" value="-30" class="slider-v">
+<input type="range" name="rotY3" min="-180" max="180" value="30"  class="slider-h">
+
+<div id="scene">
+  <div id="cubeState_A">
+    <div class="layer top">
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div>
+    <div class="layer mid">
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div>
+    <div class="layer bot">
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div>
+  </div>
+
+  <div id="cubeState_B">
+    <div class="layer top">
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div>
+    <div class="layer mid">
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div>
+    <div class="layer bot">
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div>
+  </div>
+
+  <div id="cubeState_C">
+    <div class="layer top">
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div>
+    <div class="layer mid">
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div>
+    <div class="layer bot">
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div>
+  </div>
+
+  <div id="cubeState_D">
+    <div class="layer top">
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div>
+    <div class="layer mid">
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div>
+    <div class="layer bot">
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div>
+  </div>
+
+
+    <div id="cubeState_E">
+    <div class="layer top">
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div>
+    <div class="layer mid">
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div>
+    <div class="layer bot">
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div>
+  </div>
+
+      <div id="cubeState_Z">
+    <div class="layer top">
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div>
+    <div class="layer mid">
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div>
+    <div class="layer bot">
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div>
+  </div>
+
+      <div id="cubeState_Y">
+    <div class="layer top">
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div>
+    <div class="layer mid">
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div>
+    <div class="layer bot">
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div>
+  </div>
+
+      <div id="cubeState_X">
+    <div class="layer top">
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div>
+    <div class="layer mid">
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div>
+    <div class="layer bot">
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div>
+  </div>
+
+        <div id="cubeState_V">
+    <div class="layer top">
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div>
+    <div class="layer mid">
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div>
+    <div class="layer bot">
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div>
+  </div>
+</div>
+
+
+
+<div id="controls">
+  <label for="sV">S</label>
+  <label for="sX">2</label>
+  <label for="sY">3</label>
+  <label for="sZ">4</label>
+  <label for="sA">5</label>
+  <label for="sB">6</label>
+  <label for="sC">7</label>
+  <label for="sD">8</label>
+  <label for="sE">F</label>
+</div>
+
+</div>
+<div id="wrapper2x2">
+    <h2>2X2</h2>
+    <input type="radio" name="step2" id="s2_0"  checked>
+<input type="radio" name="step2" id="s2_1">
+<input type="radio" name="step2" id="s2_2">
+<input type="radio" name="step2" id="s2_3">
+<input type="radio" name="step2" id="s2_4">
+<input type="radio" name="step2" id="s2_5">
+<input type="radio" name="step2" id="s2_6">
+<input type="radio" name="step2" id="s2_7">
+<input type="radio" name="step2" id="s2_8">
+<input type="radio" name="step2" id="s2_9">
+<input type="radio" name="step2" id="s2_10">
+<input type="radio" name="step2" id="s2_11">
+<input type="radio" name="step2" id="s2_12">
+<input type="radio" name="step2" id="s2_13">
+<input type="radio" name="step2" id="s2_14">
+<input type="radio" name="step2" id="s2_15">
+<input type="radio" name="step2" id="s2_16">
+<input type="radio" name="step2" id="s2_17">
+<input type="radio" name="step2" id="s2_18">
+<input type="radio" name="step2" id="s2_19">
+<input type="radio" name="step2" id="s2_20">
+<input type="radio" name="step2" id="s2_21">
+<input type="radio" name="step2" id="s2_22">
+<input type="radio" name="step2" id="s2_23">
+<input type="radio" name="step2" id="s2_24">
+<input type="radio" name="step2" id="s2_25">
+<input type="radio" name="step2" id="s2_26">
+<input type="radio" name="step2" id="s2_27">
+<input type="radio" name="step2" id="s2_28">
+<input type="radio" name="step2" id="s2_29">
+<input type="radio" name="step2" id="s2_30">
+<input type="radio" name="step2" id="s2_31">
+<input type="radio" name="step2" id="s2_32">
+<input type="radio" name="step2" id="s2_33">
+<input type="radio" name="step2" id="s2_34">
+<input type="radio" name="step2" id="s2_35">
+<input type="radio" name="step2" id="s2_36">
+<input type="radio" name="step2" id="s2_37">
+<input type="radio" name="step2" id="s2_38">
+<input type="radio" name="step2" id="s2_39">
+<input type="radio" name="step2" id="s2_40">
+<input type="radio" name="step2" id="s2_41">
+<input type="radio" name="step2" id="s2_42">
+<input type="radio" name="step2" id="s2_43">
+<input type="radio" name="step2" id="s2_44">
+<input type="radio" name="step2" id="s2_45">
+<input type="radio" name="step2" id="s2_46">
+<input type="radio" name="step2" id="s2_47">
+<input type="radio" name="step2" id="s2_48">
+<input type="radio" name="step2" id="s2_49">
+<input type="radio" name="step2" id="s2_50">
+<input type="radio" name="step2" id="s2_51">
+<input type="radio" name="step2" id="s2_52">
+<input type="radio" name="step2" id="s2_53">
+<input type="radio" name="step2" id="s2_54">
+<input type="radio" name="step2" id="s2_55">
+<input type="radio" name="step2" id="s2_56">
+<input type="radio" name="step2" id="s2_57">
+<input type="radio" name="step2" id="s2_58">
+<input type="radio" name="step2" id="s2_59">
+<input type="radio" name="step2" id="s2_60">
+<input type="radio" name="step2" id="s2_61">
+<input type="radio" name="step2" id="s2_62">
+<input type="radio" name="step2" id="s2_63">
+<input type="radio" name="step2" id="s2_64">
+<input type="radio" name="step2" id="s2_65">
+<input type="radio" name="step2" id="s2_66">
+
+<!-- 2x2 wrapper -->
+<input type="range" name="rotX2" min="-180" max="180" value="-20" class="slider-v">
+<input type="range" name="rotY2" min="-180" max="180" value="30"  class="slider-h">
+
+<div id="scene2">
+
+  <div id="cs2_0">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+  </div>
+  <div id="cs2_1">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+  </div>
+  <div id="cs2_2">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:white"></div>
+      <div class="face2 face2-top" style="background:orange"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:white"></div>
+      <div class="face2 face2-bottom" style="background:red"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:yellow"></div>
+      <div class="face2 face2-top" style="background:orange"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:yellow"></div>
+      <div class="face2 face2-bottom" style="background:red"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+  </div>
+  <div id="cs2_3">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:yellow"></div>
+      <div class="face2 face2-top" style="background:red"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:yellow"></div>
+      <div class="face2 face2-bottom" style="background:orange"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:white"></div>
+      <div class="face2 face2-top" style="background:red"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:white"></div>
+      <div class="face2 face2-bottom" style="background:orange"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+  </div>
+  <div id="cs2_4">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+  </div>
+  <div id="cs2_5">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:blue"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:blue"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:green"></div>
+    </div>
+  </div>
+  <div id="cs2_6">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:white"></div>
+      <div class="face2 face2-top" style="background:orange"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:white"></div>
+      <div class="face2 face2-bottom" style="background:green"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:yellow"></div>
+      <div class="face2 face2-top" style="background:blue"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:yellow"></div>
+      <div class="face2 face2-bottom" style="background:red"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+  </div>
+  <div id="cs2_7">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:yellow"></div>
+      <div class="face2 face2-top" style="background:green"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:yellow"></div>
+      <div class="face2 face2-bottom" style="background:orange"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:white"></div>
+      <div class="face2 face2-top" style="background:red"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:white"></div>
+      <div class="face2 face2-bottom" style="background:blue"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+  </div>
+  <div id="cs2_8">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+  </div>
+  <div id="cs2_9">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:white"></div>
+      <div class="face2 face2-bottom" style="background:red"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:orange"></div>
+      <div class="face2 face2-left" style="background:yellow"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:yellow"></div>
+      <div class="face2 face2-top" style="background:orange"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-bottom" style="background:red"></div>
+      <div class="face2 face2-right" style="background:white"></div>
+    </div>
+  </div>
+  <div id="cs2_10">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:white"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:red"></div>
+      <div class="face2 face2-top" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:white"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+  </div>
+  <div id="cs2_11">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:yellow"></div>
+      <div class="face2 face2-top" style="background:red"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:white"></div>
+      <div class="face2 face2-top" style="background:orange"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:yellow"></div>
+      <div class="face2 face2-bottom" style="background:orange"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:white"></div>
+      <div class="face2 face2-bottom" style="background:red"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:white"></div>
+      <div class="face2 face2-top" style="background:red"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:yellow"></div>
+      <div class="face2 face2-top" style="background:orange"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:white"></div>
+      <div class="face2 face2-bottom" style="background:orange"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:yellow"></div>
+      <div class="face2 face2-bottom" style="background:red"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+  </div>
+  <div id="cs2_12">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:white"></div>
+      <div class="face2 face2-top" style="background:orange"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-top" style="background:orange"></div>
+      <div class="face2 face2-right" style="background:white"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:red"></div>
+      <div class="face2 face2-left" style="background:yellow"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:yellow"></div>
+      <div class="face2 face2-bottom" style="background:red"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+  </div>
+  <div id="cs2_13">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-top" style="background:red"></div>
+      <div class="face2 face2-left" style="background:white"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-top" style="background:red"></div>
+      <div class="face2 face2-right" style="background:yellow"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:yellow"></div>
+      <div class="face2 face2-bottom" style="background:orange"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:white"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-bottom" style="background:orange"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+  </div>
+  <div id="cs2_14">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:white"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:red"></div>
+      <div class="face2 face2-top" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:white"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+  </div>
+  <div id="cs2_15">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:yellow"></div>
+      <div class="face2 face2-top" style="background:red"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-bottom" style="background:orange"></div>
+      <div class="face2 face2-left" style="background:white"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-bottom" style="background:orange"></div>
+      <div class="face2 face2-right" style="background:yellow"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-top" style="background:red"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:white"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+  </div>
+  <div id="cs2_16">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:white"></div>
+      <div class="face2 face2-top" style="background:blue"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:white"></div>
+      <div class="face2 face2-bottom" style="background:red"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:yellow"></div>
+      <div class="face2 face2-top" style="background:orange"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:yellow"></div>
+      <div class="face2 face2-bottom" style="background:green"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+  </div>
+  <div id="cs2_17">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:yellow"></div>
+      <div class="face2 face2-top" style="background:red"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:yellow"></div>
+      <div class="face2 face2-bottom" style="background:blue"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:white"></div>
+      <div class="face2 face2-top" style="background:green"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:white"></div>
+      <div class="face2 face2-bottom" style="background:orange"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+  </div>
+  <div id="cs2_18">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:red"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:red"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+  </div>
+  <div id="cs2_19">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:blue"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:red"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:blue"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:orange"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:red"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:green"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:green"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:orange"></div>
+    </div>
+  </div>
+  <div id="cs2_20">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:blue"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:white"></div>
+      <div class="face2 face2-top" style="background:orange"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:white"></div>
+      <div class="face2 face2-bottom" style="background:orange"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:blue"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:yellow"></div>
+      <div class="face2 face2-top" style="background:red"></div>
+      <div class="face2 face2-right" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:yellow"></div>
+      <div class="face2 face2-bottom" style="background:red"></div>
+      <div class="face2 face2-right" style="background:green"></div>
+    </div>
+  </div>
+  <div id="cs2_21">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:yellow"></div>
+      <div class="face2 face2-top" style="background:orange"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:yellow"></div>
+      <div class="face2 face2-bottom" style="background:orange"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:white"></div>
+      <div class="face2 face2-top" style="background:red"></div>
+      <div class="face2 face2-left" style="background:blue"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:white"></div>
+      <div class="face2 face2-bottom" style="background:red"></div>
+      <div class="face2 face2-left" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:green"></div>
+    </div>
+  </div>
+  <div id="cs2_22">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:blue"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:blue"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:green"></div>
+    </div>
+  </div>
+  <div id="cs2_23">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:blue"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:white"></div>
+      <div class="face2 face2-bottom" style="background:green"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:blue"></div>
+      <div class="face2 face2-left" style="background:yellow"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:yellow"></div>
+      <div class="face2 face2-top" style="background:orange"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:red"></div>
+      <div class="face2 face2-right" style="background:white"></div>
+    </div>
+  </div>
+  <div id="cs2_24">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:blue"></div>
+      <div class="face2 face2-bottom" style="background:white"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:green"></div>
+      <div class="face2 face2-top" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:white"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+  </div>
+  <div id="cs2_25">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:yellow"></div>
+      <div class="face2 face2-top" style="background:green"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:white"></div>
+      <div class="face2 face2-top" style="background:orange"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:yellow"></div>
+      <div class="face2 face2-bottom" style="background:orange"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:white"></div>
+      <div class="face2 face2-bottom" style="background:green"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:white"></div>
+      <div class="face2 face2-top" style="background:red"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:yellow"></div>
+      <div class="face2 face2-top" style="background:blue"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:white"></div>
+      <div class="face2 face2-bottom" style="background:blue"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:yellow"></div>
+      <div class="face2 face2-bottom" style="background:red"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+  </div>
+  <div id="cs2_26">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:white"></div>
+      <div class="face2 face2-top" style="background:orange"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:red"></div>
+      <div class="face2 face2-top" style="background:blue"></div>
+      <div class="face2 face2-right" style="background:white"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-bottom" style="background:red"></div>
+      <div class="face2 face2-left" style="background:yellow"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:yellow"></div>
+      <div class="face2 face2-bottom" style="background:green"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+  </div>
+  <div id="cs2_27">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-top" style="background:red"></div>
+      <div class="face2 face2-left" style="background:white"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:green"></div>
+      <div class="face2 face2-right" style="background:yellow"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:yellow"></div>
+      <div class="face2 face2-bottom" style="background:orange"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:white"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:blue"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:blue"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:green"></div>
+    </div>
+  </div>
+  <div id="cs2_28">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:blue"></div>
+      <div class="face2 face2-bottom" style="background:white"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:green"></div>
+      <div class="face2 face2-top" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:white"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+  </div>
+  <div id="cs2_29">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:yellow"></div>
+      <div class="face2 face2-top" style="background:green"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-bottom" style="background:blue"></div>
+      <div class="face2 face2-left" style="background:white"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:orange"></div>
+      <div class="face2 face2-right" style="background:yellow"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-top" style="background:red"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:white"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+  </div>
+  <div id="cs2_30">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:white"></div>
+      <div class="face2 face2-top" style="background:blue"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:white"></div>
+      <div class="face2 face2-bottom" style="background:green"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:yellow"></div>
+      <div class="face2 face2-top" style="background:blue"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:yellow"></div>
+      <div class="face2 face2-bottom" style="background:green"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+  </div>
+  <div id="cs2_31">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:yellow"></div>
+      <div class="face2 face2-top" style="background:green"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:yellow"></div>
+      <div class="face2 face2-bottom" style="background:blue"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:white"></div>
+      <div class="face2 face2-top" style="background:green"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:white"></div>
+      <div class="face2 face2-bottom" style="background:blue"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+  </div>
+  <div id="cs2_32">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:red"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:red"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+  </div>
+  <div id="cs2_33">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:orange"></div>
+      <div class="face2 face2-left" style="background:blue"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:yellow"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:white"></div>
+      <div class="face2 face2-bottom" style="background:red"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:orange"></div>
+      <div class="face2 face2-left" style="background:blue"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:yellow"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:white"></div>
+      <div class="face2 face2-bottom" style="background:red"></div>
+      <div class="face2 face2-right" style="background:green"></div>
+    </div>
+  </div>
+  <div id="cs2_34">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:white"></div>
+      <div class="face2 face2-top" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:green"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:orange"></div>
+      <div class="face2 face2-left" style="background:yellow"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:red"></div>
+      <div class="face2 face2-top" style="background:blue"></div>
+      <div class="face2 face2-right" style="background:white"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:white"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+  </div>
+  <div id="cs2_35">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:yellow"></div>
+      <div class="face2 face2-top" style="background:green"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:yellow"></div>
+      <div class="face2 face2-bottom" style="background:orange"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:white"></div>
+      <div class="face2 face2-bottom" style="background:red"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:white"></div>
+      <div class="face2 face2-top" style="background:red"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:yellow"></div>
+      <div class="face2 face2-top" style="background:orange"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:blue"></div>
+      <div class="face2 face2-left" style="background:yellow"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-bottom" style="background:red"></div>
+      <div class="face2 face2-right" style="background:white"></div>
+    </div>
+  </div>
+  <div id="cs2_36">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-top" style="background:orange"></div>
+      <div class="face2 face2-left" style="background:yellow"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-top" style="background:orange"></div>
+      <div class="face2 face2-right" style="background:white"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-bottom" style="background:red"></div>
+      <div class="face2 face2-left" style="background:yellow"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-bottom" style="background:red"></div>
+      <div class="face2 face2-right" style="background:white"></div>
+    </div>
+  </div>
+  <div id="cs2_37">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:white"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:red"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:red"></div>
+      <div class="face2 face2-top" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-bottom" style="background:white"></div>
+      <div class="face2 face2-right" style="background:orange"></div>
+    </div>
+  </div>
+  <div id="cs2_38">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:yellow"></div>
+      <div class="face2 face2-top" style="background:red"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:yellow"></div>
+      <div class="face2 face2-bottom" style="background:orange"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:white"></div>
+      <div class="face2 face2-top" style="background:red"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:white"></div>
+      <div class="face2 face2-bottom" style="background:orange"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+  </div>
+  <div id="cs2_39">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:yellow"></div>
+      <div class="face2 face2-top" style="background:red"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:yellow"></div>
+      <div class="face2 face2-bottom" style="background:orange"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:white"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:white"></div>
+      <div class="face2 face2-top" style="background:red"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:red"></div>
+      <div class="face2 face2-top" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:white"></div>
+      <div class="face2 face2-bottom" style="background:orange"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:white"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+  </div>
+  <div id="cs2_40">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-top" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:orange"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:white"></div>
+      <div class="face2 face2-left" style="background:red"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:white"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+  </div>
+  <div id="cs2_41">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-top" style="background:red"></div>
+      <div class="face2 face2-left" style="background:white"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-top" style="background:red"></div>
+      <div class="face2 face2-right" style="background:yellow"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:yellow"></div>
+      <div class="face2 face2-bottom" style="background:orange"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:white"></div>
+      <div class="face2 face2-bottom" style="background:red"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:white"></div>
+      <div class="face2 face2-top" style="background:orange"></div>
+      <div class="face2 face2-left" style="background:yellow"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:yellow"></div>
+      <div class="face2 face2-top" style="background:orange"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-bottom" style="background:orange"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-bottom" style="background:red"></div>
+      <div class="face2 face2-right" style="background:white"></div>
+    </div>
+  </div>
+  <div id="cs2_42">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:white"></div>
+      <div class="face2 face2-top" style="background:orange"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:white"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:white"></div>
+      <div class="face2 face2-bottom" style="background:red"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:red"></div>
+      <div class="face2 face2-top" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:yellow"></div>
+      <div class="face2 face2-top" style="background:orange"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:white"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:yellow"></div>
+      <div class="face2 face2-bottom" style="background:red"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+  </div>
+  <div id="cs2_43">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:yellow"></div>
+      <div class="face2 face2-top" style="background:red"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:white"></div>
+      <div class="face2 face2-top" style="background:orange"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-bottom" style="background:orange"></div>
+      <div class="face2 face2-left" style="background:white"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-bottom" style="background:orange"></div>
+      <div class="face2 face2-right" style="background:yellow"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-top" style="background:red"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-top" style="background:orange"></div>
+      <div class="face2 face2-right" style="background:white"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:white"></div>
+      <div class="face2 face2-bottom" style="background:red"></div>
+      <div class="face2 face2-left" style="background:yellow"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:yellow"></div>
+      <div class="face2 face2-bottom" style="background:red"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+  </div>
+  <div id="cs2_44">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:blue"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:white"></div>
+      <div class="face2 face2-right" style="background:white"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:yellow"></div>
+      <div class="face2 face2-top" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:red"></div>
+      <div class="face2 face2-left" style="background:yellow"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:green"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+  </div>
+  <div id="cs2_45">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:yellow"></div>
+      <div class="face2 face2-top" style="background:red"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:white"></div>
+      <div class="face2 face2-top" style="background:orange"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:blue"></div>
+      <div class="face2 face2-left" style="background:yellow"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:white"></div>
+      <div class="face2 face2-top" style="background:green"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-top" style="background:orange"></div>
+      <div class="face2 face2-right" style="background:white"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:white"></div>
+      <div class="face2 face2-bottom" style="background:orange"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:yellow"></div>
+      <div class="face2 face2-bottom" style="background:red"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+  </div>
+  <div id="cs2_46">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:white"></div>
+      <div class="face2 face2-top" style="background:orange"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:red"></div>
+      <div class="face2 face2-left" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:yellow"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:red"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:white"></div>
+      <div class="face2 face2-top" style="background:orange"></div>
+      <div class="face2 face2-right" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:red"></div>
+      <div class="face2 face2-left" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:yellow"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+  </div>
+  <div id="cs2_47">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:white"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:blue"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:red"></div>
+      <div class="face2 face2-right" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:yellow"></div>
+      <div class="face2 face2-bottom" style="background:orange"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:white"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:blue"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:red"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:yellow"></div>
+      <div class="face2 face2-bottom" style="background:orange"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:green"></div>
+    </div>
+  </div>
+  <div id="cs2_48">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-top" style="background:red"></div>
+      <div class="face2 face2-left" style="background:white"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-top" style="background:orange"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:yellow"></div>
+      <div class="face2 face2-bottom" style="background:orange"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:white"></div>
+      <div class="face2 face2-bottom" style="background:green"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:white"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:yellow"></div>
+      <div class="face2 face2-top" style="background:blue"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-bottom" style="background:orange"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:yellow"></div>
+      <div class="face2 face2-bottom" style="background:red"></div>
+      <div class="face2 face2-right" style="background:yellow"></div>
+    </div>
+  </div>
+  <div id="cs2_49">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:green"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-top" style="background:red"></div>
+      <div class="face2 face2-right" style="background:yellow"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:white"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:red"></div>
+      <div class="face2 face2-top" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:white"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:white"></div>
+      <div class="face2 face2-bottom" style="background:blue"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+  </div>
+  <div id="cs2_50">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-top" style="background:red"></div>
+      <div class="face2 face2-left" style="background:white"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-top" style="background:red"></div>
+      <div class="face2 face2-right" style="background:yellow"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-bottom" style="background:orange"></div>
+      <div class="face2 face2-left" style="background:white"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-bottom" style="background:orange"></div>
+      <div class="face2 face2-right" style="background:yellow"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+  </div>
+  <div id="cs2_51">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-top" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:red"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-top" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:orange"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:white"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:red"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-bottom" style="background:white"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+  </div>
+  <div id="cs2_52">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:white"></div>
+      <div class="face2 face2-top" style="background:orange"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:white"></div>
+      <div class="face2 face2-bottom" style="background:red"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:yellow"></div>
+      <div class="face2 face2-top" style="background:orange"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:yellow"></div>
+      <div class="face2 face2-bottom" style="background:red"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+  </div>
+  <div id="cs2_53">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-bottom" style="background:white"></div>
+      <div class="face2 face2-left" style="background:red"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-bottom" style="background:white"></div>
+      <div class="face2 face2-right" style="background:orange"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-top" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+  </div>
+  <div id="cs2_54">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:yellow"></div>
+      <div class="face2 face2-top" style="background:red"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:white"></div>
+      <div class="face2 face2-top" style="background:blue"></div>
+      <div class="face2 face2-right" style="background:yellow"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-bottom" style="background:orange"></div>
+      <div class="face2 face2-left" style="background:white"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:white"></div>
+      <div class="face2 face2-bottom" style="background:red"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-top" style="background:red"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:orange"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:white"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:yellow"></div>
+      <div class="face2 face2-bottom" style="background:green"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+  </div>
+  <div id="cs2_55">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:white"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:yellow"></div>
+      <div class="face2 face2-bottom" style="background:blue"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-bottom" style="background:orange"></div>
+      <div class="face2 face2-right" style="background:yellow"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:red"></div>
+      <div class="face2 face2-top" style="background:green"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:white"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+  </div>
+  <div id="cs2_56">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:yellow"></div>
+      <div class="face2 face2-top" style="background:red"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:white"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:orange"></div>
+      <div class="face2 face2-right" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:yellow"></div>
+      <div class="face2 face2-top" style="background:red"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:red"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:white"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:orange"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+  </div>
+  <div id="cs2_57">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:white"></div>
+      <div class="face2 face2-bottom" style="background:red"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-top" style="background:orange"></div>
+      <div class="face2 face2-left" style="background:yellow"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:yellow"></div>
+      <div class="face2 face2-top" style="background:blue"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:red"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-bottom" style="background:green"></div>
+      <div class="face2 face2-right" style="background:white"></div>
+    </div>
+  </div>
+  <div id="cs2_58">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:blue"></div>
+      <div class="face2 face2-top" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:white"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:red"></div>
+      <div class="face2 face2-top" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:green"></div>
+      <div class="face2 face2-bottom" style="background:white"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+  </div>
+  <div id="cs2_59">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:yellow"></div>
+      <div class="face2 face2-top" style="background:red"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:white"></div>
+      <div class="face2 face2-top" style="background:blue"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:yellow"></div>
+      <div class="face2 face2-bottom" style="background:blue"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:white"></div>
+      <div class="face2 face2-bottom" style="background:red"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:white"></div>
+      <div class="face2 face2-top" style="background:green"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:yellow"></div>
+      <div class="face2 face2-top" style="background:orange"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:white"></div>
+      <div class="face2 face2-bottom" style="background:orange"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:yellow"></div>
+      <div class="face2 face2-bottom" style="background:green"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+  </div>
+  <div id="cs2_60">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:white"></div>
+      <div class="face2 face2-top" style="background:blue"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:red"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-top" style="background:orange"></div>
+      <div class="face2 face2-right" style="background:white"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:green"></div>
+      <div class="face2 face2-left" style="background:yellow"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:yellow"></div>
+      <div class="face2 face2-bottom" style="background:red"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+  </div>
+  <div id="cs2_61">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:orange"></div>
+      <div class="face2 face2-top" style="background:green"></div>
+      <div class="face2 face2-left" style="background:white"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-top" style="background:red"></div>
+      <div class="face2 face2-right" style="background:yellow"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:yellow"></div>
+      <div class="face2 face2-bottom" style="background:blue"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:white"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-bottom" style="background:orange"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+  </div>
+  <div id="cs2_62">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:blue"></div>
+      <div class="face2 face2-top" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:white"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:red"></div>
+      <div class="face2 face2-top" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:blue"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:red"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:green"></div>
+      <div class="face2 face2-bottom" style="background:white"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+  </div>
+  <div id="cs2_63">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:yellow"></div>
+      <div class="face2 face2-top" style="background:red"></div>
+      <div class="face2 face2-left" style="background:orange"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:orange"></div>
+      <div class="face2 face2-left" style="background:white"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:green"></div>
+      <div class="face2 face2-bottom" style="background:blue"></div>
+      <div class="face2 face2-right" style="background:yellow"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:red"></div>
+      <div class="face2 face2-top" style="background:green"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:red"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:white"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+  </div>
+  <div id="cs2_64">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:white"></div>
+      <div class="face2 face2-top" style="background:red"></div>
+      <div class="face2 face2-right" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:white"></div>
+      <div class="face2 face2-bottom" style="background:red"></div>
+      <div class="face2 face2-right" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:red"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:yellow"></div>
+      <div class="face2 face2-top" style="background:orange"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:yellow"></div>
+      <div class="face2 face2-bottom" style="background:orange"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+  </div>
+  <div id="cs2_65">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:yellow"></div>
+      <div class="face2 face2-top" style="background:red"></div>
+      <div class="face2 face2-left" style="background:blue"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:yellow"></div>
+      <div class="face2 face2-bottom" style="background:red"></div>
+      <div class="face2 face2-left" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:white"></div>
+      <div class="face2 face2-top" style="background:orange"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:red"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:white"></div>
+      <div class="face2 face2-bottom" style="background:orange"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+  </div>
+  <div id="cs2_66">
+    <div class="cubie2 top-layer f-tl">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer f-tr">
+      <div class="face2 face2-front" style="background:red"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+    <div class="cubie2 bot-layer f-bl">
+      <div class="face2 face2-front" style="background:blue"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:red"></div>
+    </div>
+    <div class="cubie2 bot-layer f-br">
+      <div class="face2 face2-front" style="background:blue"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:orange"></div>
+    </div>
+    <div class="cubie2 top-layer b-tl">
+      <div class="face2 face2-back" style="background:green"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-left" style="background:green"></div>
+    </div>
+    <div class="cubie2 top-layer b-tr">
+      <div class="face2 face2-back" style="background:green"></div>
+      <div class="face2 face2-top" style="background:white"></div>
+      <div class="face2 face2-right" style="background:orange"></div>
+    </div>
+    <div class="cubie2 bot-layer b-bl">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-left" style="background:red"></div>
+    </div>
+    <div class="cubie2 bot-layer b-br">
+      <div class="face2 face2-back" style="background:orange"></div>
+      <div class="face2 face2-bottom" style="background:yellow"></div>
+      <div class="face2 face2-right" style="background:blue"></div>
+    </div>
+  </div>
+
+</div>
+
+<div id="controls2">
+  <div class="ctrl2" id="ctrl2_0">
+    <label for="s2_1" class="move2-btn move2-U">U</label>
+    <label for="s2_2" class="move2-btn move2-R">R</label>
+    <label for="s2_3" class="move2-btn move2-L">L</label>
+    <label for="s2_4" class="move2-btn move2-B">B</label>
+  </div>
+  <div class="ctrl2" id="ctrl2_1">
+    <label for="s2_5" class="move2-btn move2-U">U</label>
+    <label for="s2_6" class="move2-btn move2-R">R</label>
+    <label for="s2_7" class="move2-btn move2-L">L</label>
+    <label for="s2_8" class="move2-btn move2-B">B</label>
+  </div>
+  <div class="ctrl2" id="ctrl2_2">
+    <label for="s2_9" class="move2-btn move2-U">U</label>
+    <label for="s2_10" class="move2-btn move2-R">R</label>
+    <label for="s2_11" class="move2-btn move2-L">L</label>
+    <label for="s2_12" class="move2-btn move2-B">B</label>
+  </div>
+  <div class="ctrl2" id="ctrl2_3">
+    <label for="s2_13" class="move2-btn move2-U">U</label>
+    <label for="s2_11" class="move2-btn move2-R">R</label>
+    <label for="s2_14" class="move2-btn move2-L">L</label>
+    <label for="s2_15" class="move2-btn move2-B">B</label>
+  </div>
+  <div class="ctrl2" id="ctrl2_4">
+    <label for="s2_8" class="move2-btn move2-U">U</label>
+    <label for="s2_16" class="move2-btn move2-R">R</label>
+    <label for="s2_17" class="move2-btn move2-L">L</label>
+    <label for="s2_18" class="move2-btn move2-B">B</label>
+  </div>
+  <div class="ctrl2" id="ctrl2_5">
+    <label for="s2_19" class="move2-btn move2-U">U</label>
+    <label for="s2_20" class="move2-btn move2-R">R</label>
+    <label for="s2_21" class="move2-btn move2-L">L</label>
+    <label for="s2_22" class="move2-btn move2-B">B</label>
+  </div>
+  <div class="ctrl2" id="ctrl2_6">
+    <label for="s2_23" class="move2-btn move2-U">U</label>
+    <label for="s2_24" class="move2-btn move2-R">R</label>
+    <label for="s2_25" class="move2-btn move2-L">L</label>
+    <label for="s2_26" class="move2-btn move2-B">B</label>
+  </div>
+  <div class="ctrl2" id="ctrl2_7">
+    <label for="s2_27" class="move2-btn move2-U">U</label>
+    <label for="s2_25" class="move2-btn move2-R">R</label>
+    <label for="s2_28" class="move2-btn move2-L">L</label>
+    <label for="s2_29" class="move2-btn move2-B">B</label>
+  </div>
+  <div class="ctrl2" id="ctrl2_8">
+    <label for="s2_22" class="move2-btn move2-U">U</label>
+    <label for="s2_30" class="move2-btn move2-R">R</label>
+    <label for="s2_31" class="move2-btn move2-L">L</label>
+    <label for="s2_32" class="move2-btn move2-B">B</label>
+  </div>
+  <div class="ctrl2" id="ctrl2_9">
+    <label for="s2_33" class="move2-btn move2-U">U</label>
+    <label for="s2_34" class="move2-btn move2-R">R</label>
+    <label for="s2_35" class="move2-btn move2-L">L</label>
+    <label for="s2_36" class="move2-btn move2-B">B</label>
+  </div>
+  <div class="ctrl2" id="ctrl2_10">
+    <label for="s2_37" class="move2-btn move2-U">U</label>
+    <label for="s2_38" class="move2-btn move2-R">R</label>
+    <label for="s2_39" class="move2-btn move2-L">L</label>
+    <label for="s2_40" class="move2-btn move2-B">B</label>
+  </div>
+  <div class="ctrl2" id="ctrl2_11">
+    <label for="s2_41" class="move2-btn move2-U">U</label>
+    <label for="s2_39" class="move2-btn move2-R">R</label>
+    <label for="s2_42" class="move2-btn move2-L">L</label>
+    <label for="s2_43" class="move2-btn move2-B">B</label>
+  </div>
+  <div class="ctrl2" id="ctrl2_12">
+    <label for="s2_36" class="move2-btn move2-U">U</label>
+    <label for="s2_44" class="move2-btn move2-R">R</label>
+    <label for="s2_45" class="move2-btn move2-L">L</label>
+    <label for="s2_46" class="move2-btn move2-B">B</label>
+  </div>
+  <div class="ctrl2" id="ctrl2_13">
+    <label for="s2_47" class="move2-btn move2-U">U</label>
+    <label for="s2_48" class="move2-btn move2-R">R</label>
+    <label for="s2_49" class="move2-btn move2-L">L</label>
+    <label for="s2_50" class="move2-btn move2-B">B</label>
+  </div>
+  <div class="ctrl2" id="ctrl2_14">
+    <label for="s2_51" class="move2-btn move2-U">U</label>
+    <label for="s2_42" class="move2-btn move2-R">R</label>
+    <label for="s2_52" class="move2-btn move2-L">L</label>
+    <label for="s2_53" class="move2-btn move2-B">B</label>
+  </div>
+  <div class="ctrl2" id="ctrl2_15">
+    <label for="s2_50" class="move2-btn move2-U">U</label>
+    <label for="s2_54" class="move2-btn move2-R">R</label>
+    <label for="s2_55" class="move2-btn move2-L">L</label>
+    <label for="s2_56" class="move2-btn move2-B">B</label>
+  </div>
+  <div class="ctrl2" id="ctrl2_16">
+    <label for="s2_57" class="move2-btn move2-U">U</label>
+    <label for="s2_58" class="move2-btn move2-R">R</label>
+    <label for="s2_59" class="move2-btn move2-L">L</label>
+    <label for="s2_60" class="move2-btn move2-B">B</label>
+  </div>
+  <div class="ctrl2" id="ctrl2_17">
+    <label for="s2_61" class="move2-btn move2-U">U</label>
+    <label for="s2_59" class="move2-btn move2-R">R</label>
+    <label for="s2_62" class="move2-btn move2-L">L</label>
+    <label for="s2_63" class="move2-btn move2-B">B</label>
+  </div>
+  <div class="ctrl2" id="ctrl2_18">
+    <label for="s2_32" class="move2-btn move2-U">U</label>
+    <label for="s2_64" class="move2-btn move2-R">R</label>
+    <label for="s2_65" class="move2-btn move2-L">L</label>
+    <label for="s2_66" class="move2-btn move2-B">B</label>
+  </div>
+  <div class="ctrl2" id="ctrl2_19">
+    <label for="s2_0" class="move2-btn move2-U">U</label>
+    <span class="move2-btn move2-R disabled">R</span>
+    <span class="move2-btn move2-L disabled">L</span>
+    <span class="move2-btn move2-B disabled">B</span>
+  </div>
+  <div class="ctrl2" id="ctrl2_20">
+    <span class="move2-btn move2-U disabled">U</span>
+    <span class="move2-btn move2-R disabled">R</span>
+    <span class="move2-btn move2-L disabled">L</span>
+    <span class="move2-btn move2-B disabled">B</span>
+  </div>
+  <div class="ctrl2" id="ctrl2_21">
+    <span class="move2-btn move2-U disabled">U</span>
+    <span class="move2-btn move2-R disabled">R</span>
+    <span class="move2-btn move2-L disabled">L</span>
+    <span class="move2-btn move2-B disabled">B</span>
+  </div>
+  <div class="ctrl2" id="ctrl2_22">
+    <span class="move2-btn move2-U disabled">U</span>
+    <span class="move2-btn move2-R disabled">R</span>
+    <span class="move2-btn move2-L disabled">L</span>
+    <span class="move2-btn move2-B disabled">B</span>
+  </div>
+  <div class="ctrl2" id="ctrl2_23">
+    <span class="move2-btn move2-U disabled">U</span>
+    <span class="move2-btn move2-R disabled">R</span>
+    <span class="move2-btn move2-L disabled">L</span>
+    <span class="move2-btn move2-B disabled">B</span>
+  </div>
+  <div class="ctrl2" id="ctrl2_24">
+    <span class="move2-btn move2-U disabled">U</span>
+    <span class="move2-btn move2-R disabled">R</span>
+    <span class="move2-btn move2-L disabled">L</span>
+    <span class="move2-btn move2-B disabled">B</span>
+  </div>
+  <div class="ctrl2" id="ctrl2_25">
+    <span class="move2-btn move2-U disabled">U</span>
+    <span class="move2-btn move2-R disabled">R</span>
+    <span class="move2-btn move2-L disabled">L</span>
+    <span class="move2-btn move2-B disabled">B</span>
+  </div>
+  <div class="ctrl2" id="ctrl2_26">
+    <span class="move2-btn move2-U disabled">U</span>
+    <span class="move2-btn move2-R disabled">R</span>
+    <span class="move2-btn move2-L disabled">L</span>
+    <span class="move2-btn move2-B disabled">B</span>
+  </div>
+  <div class="ctrl2" id="ctrl2_27">
+    <span class="move2-btn move2-U disabled">U</span>
+    <span class="move2-btn move2-R disabled">R</span>
+    <span class="move2-btn move2-L disabled">L</span>
+    <span class="move2-btn move2-B disabled">B</span>
+  </div>
+  <div class="ctrl2" id="ctrl2_28">
+    <span class="move2-btn move2-U disabled">U</span>
+    <span class="move2-btn move2-R disabled">R</span>
+    <span class="move2-btn move2-L disabled">L</span>
+    <span class="move2-btn move2-B disabled">B</span>
+  </div>
+  <div class="ctrl2" id="ctrl2_29">
+    <span class="move2-btn move2-U disabled">U</span>
+    <span class="move2-btn move2-R disabled">R</span>
+    <span class="move2-btn move2-L disabled">L</span>
+    <span class="move2-btn move2-B disabled">B</span>
+  </div>
+  <div class="ctrl2" id="ctrl2_30">
+    <span class="move2-btn move2-U disabled">U</span>
+    <span class="move2-btn move2-R disabled">R</span>
+    <span class="move2-btn move2-L disabled">L</span>
+    <span class="move2-btn move2-B disabled">B</span>
+  </div>
+  <div class="ctrl2" id="ctrl2_31">
+    <span class="move2-btn move2-U disabled">U</span>
+    <span class="move2-btn move2-R disabled">R</span>
+    <span class="move2-btn move2-L disabled">L</span>
+    <span class="move2-btn move2-B disabled">B</span>
+  </div>
+  <div class="ctrl2" id="ctrl2_32">
+    <span class="move2-btn move2-U disabled">U</span>
+    <span class="move2-btn move2-R disabled">R</span>
+    <span class="move2-btn move2-L disabled">L</span>
+    <span class="move2-btn move2-B disabled">B</span>
+  </div>
+  <div class="ctrl2" id="ctrl2_33">
+    <span class="move2-btn move2-U disabled">U</span>
+    <span class="move2-btn move2-R disabled">R</span>
+    <span class="move2-btn move2-L disabled">L</span>
+    <span class="move2-btn move2-B disabled">B</span>
+  </div>
+  <div class="ctrl2" id="ctrl2_34">
+    <span class="move2-btn move2-U disabled">U</span>
+    <span class="move2-btn move2-R disabled">R</span>
+    <span class="move2-btn move2-L disabled">L</span>
+    <span class="move2-btn move2-B disabled">B</span>
+  </div>
+  <div class="ctrl2" id="ctrl2_35">
+    <span class="move2-btn move2-U disabled">U</span>
+    <span class="move2-btn move2-R disabled">R</span>
+    <span class="move2-btn move2-L disabled">L</span>
+    <span class="move2-btn move2-B disabled">B</span>
+  </div>
+  <div class="ctrl2" id="ctrl2_36">
+    <span class="move2-btn move2-U disabled">U</span>
+    <span class="move2-btn move2-R disabled">R</span>
+    <span class="move2-btn move2-L disabled">L</span>
+    <span class="move2-btn move2-B disabled">B</span>
+  </div>
+  <div class="ctrl2" id="ctrl2_37">
+    <span class="move2-btn move2-U disabled">U</span>
+    <span class="move2-btn move2-R disabled">R</span>
+    <span class="move2-btn move2-L disabled">L</span>
+    <span class="move2-btn move2-B disabled">B</span>
+  </div>
+  <div class="ctrl2" id="ctrl2_38">
+    <span class="move2-btn move2-U disabled">U</span>
+    <label for="s2_0" class="move2-btn move2-R">R</label>
+    <span class="move2-btn move2-L disabled">L</span>
+    <span class="move2-btn move2-B disabled">B</span>
+  </div>
+  <div class="ctrl2" id="ctrl2_39">
+    <span class="move2-btn move2-U disabled">U</span>
+    <span class="move2-btn move2-R disabled">R</span>
+    <span class="move2-btn move2-L disabled">L</span>
+    <span class="move2-btn move2-B disabled">B</span>
+  </div>
+  <div class="ctrl2" id="ctrl2_40">
+    <span class="move2-btn move2-U disabled">U</span>
+    <span class="move2-btn move2-R disabled">R</span>
+    <span class="move2-btn move2-L disabled">L</span>
+    <span class="move2-btn move2-B disabled">B</span>
+  </div>
+  <div class="ctrl2" id="ctrl2_41">
+    <span class="move2-btn move2-U disabled">U</span>
+    <span class="move2-btn move2-R disabled">R</span>
+    <span class="move2-btn move2-L disabled">L</span>
+    <span class="move2-btn move2-B disabled">B</span>
+  </div>
+  <div class="ctrl2" id="ctrl2_42">
+    <span class="move2-btn move2-U disabled">U</span>
+    <span class="move2-btn move2-R disabled">R</span>
+    <span class="move2-btn move2-L disabled">L</span>
+    <span class="move2-btn move2-B disabled">B</span>
+  </div>
+  <div class="ctrl2" id="ctrl2_43">
+    <span class="move2-btn move2-U disabled">U</span>
+    <span class="move2-btn move2-R disabled">R</span>
+    <span class="move2-btn move2-L disabled">L</span>
+    <span class="move2-btn move2-B disabled">B</span>
+  </div>
+  <div class="ctrl2" id="ctrl2_44">
+    <span class="move2-btn move2-U disabled">U</span>
+    <span class="move2-btn move2-R disabled">R</span>
+    <span class="move2-btn move2-L disabled">L</span>
+    <span class="move2-btn move2-B disabled">B</span>
+  </div>
+  <div class="ctrl2" id="ctrl2_45">
+    <span class="move2-btn move2-U disabled">U</span>
+    <span class="move2-btn move2-R disabled">R</span>
+    <span class="move2-btn move2-L disabled">L</span>
+    <span class="move2-btn move2-B disabled">B</span>
+  </div>
+  <div class="ctrl2" id="ctrl2_46">
+    <span class="move2-btn move2-U disabled">U</span>
+    <span class="move2-btn move2-R disabled">R</span>
+    <span class="move2-btn move2-L disabled">L</span>
+    <span class="move2-btn move2-B disabled">B</span>
+  </div>
+  <div class="ctrl2" id="ctrl2_47">
+    <span class="move2-btn move2-U disabled">U</span>
+    <span class="move2-btn move2-R disabled">R</span>
+    <span class="move2-btn move2-L disabled">L</span>
+    <span class="move2-btn move2-B disabled">B</span>
+  </div>
+  <div class="ctrl2" id="ctrl2_48">
+    <span class="move2-btn move2-U disabled">U</span>
+    <span class="move2-btn move2-R disabled">R</span>
+    <span class="move2-btn move2-L disabled">L</span>
+    <span class="move2-btn move2-B disabled">B</span>
+  </div>
+  <div class="ctrl2" id="ctrl2_49">
+    <span class="move2-btn move2-U disabled">U</span>
+    <span class="move2-btn move2-R disabled">R</span>
+    <span class="move2-btn move2-L disabled">L</span>
+    <span class="move2-btn move2-B disabled">B</span>
+  </div>
+  <div class="ctrl2" id="ctrl2_50">
+    <span class="move2-btn move2-U disabled">U</span>
+    <span class="move2-btn move2-R disabled">R</span>
+    <span class="move2-btn move2-L disabled">L</span>
+    <span class="move2-btn move2-B disabled">B</span>
+  </div>
+  <div class="ctrl2" id="ctrl2_51">
+    <span class="move2-btn move2-U disabled">U</span>
+    <span class="move2-btn move2-R disabled">R</span>
+    <span class="move2-btn move2-L disabled">L</span>
+    <span class="move2-btn move2-B disabled">B</span>
+  </div>
+  <div class="ctrl2" id="ctrl2_52">
+    <span class="move2-btn move2-U disabled">U</span>
+    <span class="move2-btn move2-R disabled">R</span>
+    <label for="s2_0" class="move2-btn move2-L">L</label>
+    <span class="move2-btn move2-B disabled">B</span>
+  </div>
+  <div class="ctrl2" id="ctrl2_53">
+    <span class="move2-btn move2-U disabled">U</span>
+    <span class="move2-btn move2-R disabled">R</span>
+    <span class="move2-btn move2-L disabled">L</span>
+    <span class="move2-btn move2-B disabled">B</span>
+  </div>
+  <div class="ctrl2" id="ctrl2_54">
+    <span class="move2-btn move2-U disabled">U</span>
+    <span class="move2-btn move2-R disabled">R</span>
+    <span class="move2-btn move2-L disabled">L</span>
+    <span class="move2-btn move2-B disabled">B</span>
+  </div>
+  <div class="ctrl2" id="ctrl2_55">
+    <span class="move2-btn move2-U disabled">U</span>
+    <span class="move2-btn move2-R disabled">R</span>
+    <span class="move2-btn move2-L disabled">L</span>
+    <span class="move2-btn move2-B disabled">B</span>
+  </div>
+  <div class="ctrl2" id="ctrl2_56">
+    <span class="move2-btn move2-U disabled">U</span>
+    <span class="move2-btn move2-R disabled">R</span>
+    <span class="move2-btn move2-L disabled">L</span>
+    <span class="move2-btn move2-B disabled">B</span>
+  </div>
+  <div class="ctrl2" id="ctrl2_57">
+    <span class="move2-btn move2-U disabled">U</span>
+    <span class="move2-btn move2-R disabled">R</span>
+    <span class="move2-btn move2-L disabled">L</span>
+    <span class="move2-btn move2-B disabled">B</span>
+  </div>
+  <div class="ctrl2" id="ctrl2_58">
+    <span class="move2-btn move2-U disabled">U</span>
+    <span class="move2-btn move2-R disabled">R</span>
+    <span class="move2-btn move2-L disabled">L</span>
+    <span class="move2-btn move2-B disabled">B</span>
+  </div>
+  <div class="ctrl2" id="ctrl2_59">
+    <span class="move2-btn move2-U disabled">U</span>
+    <span class="move2-btn move2-R disabled">R</span>
+    <span class="move2-btn move2-L disabled">L</span>
+    <span class="move2-btn move2-B disabled">B</span>
+  </div>
+  <div class="ctrl2" id="ctrl2_60">
+    <span class="move2-btn move2-U disabled">U</span>
+    <span class="move2-btn move2-R disabled">R</span>
+    <span class="move2-btn move2-L disabled">L</span>
+    <span class="move2-btn move2-B disabled">B</span>
+  </div>
+  <div class="ctrl2" id="ctrl2_61">
+    <span class="move2-btn move2-U disabled">U</span>
+    <span class="move2-btn move2-R disabled">R</span>
+    <span class="move2-btn move2-L disabled">L</span>
+    <span class="move2-btn move2-B disabled">B</span>
+  </div>
+  <div class="ctrl2" id="ctrl2_62">
+    <span class="move2-btn move2-U disabled">U</span>
+    <span class="move2-btn move2-R disabled">R</span>
+    <span class="move2-btn move2-L disabled">L</span>
+    <span class="move2-btn move2-B disabled">B</span>
+  </div>
+  <div class="ctrl2" id="ctrl2_63">
+    <span class="move2-btn move2-U disabled">U</span>
+    <span class="move2-btn move2-R disabled">R</span>
+    <span class="move2-btn move2-L disabled">L</span>
+    <span class="move2-btn move2-B disabled">B</span>
+  </div>
+  <div class="ctrl2" id="ctrl2_64">
+    <span class="move2-btn move2-U disabled">U</span>
+    <span class="move2-btn move2-R disabled">R</span>
+    <span class="move2-btn move2-L disabled">L</span>
+    <span class="move2-btn move2-B disabled">B</span>
+  </div>
+  <div class="ctrl2" id="ctrl2_65">
+    <span class="move2-btn move2-U disabled">U</span>
+    <span class="move2-btn move2-R disabled">R</span>
+    <span class="move2-btn move2-L disabled">L</span>
+    <span class="move2-btn move2-B disabled">B</span>
+  </div>
+  <div class="ctrl2" id="ctrl2_66">
+    <span class="move2-btn move2-U disabled">U</span>
+    <span class="move2-btn move2-R disabled">R</span>
+    <span class="move2-btn move2-L disabled">L</span>
+    <label for="s2_0" class="move2-btn move2-B">B</label>
+  </div>
+
+</div>
+</div>
+</body>
+<script src="script.js"></script>
+</html>
